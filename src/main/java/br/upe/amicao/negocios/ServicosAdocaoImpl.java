@@ -104,13 +104,13 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     public List<ListarAdocao> buscarAdocaoPorAnimal(String nomeAnimal) {
-        List<ListarAdocao> adocao = repositorioAdocao.findByAnimal(nomeAnimal); 
+        List<ListarAdocao> adocao = repositorioAdocao.buscarPorAnimal(nomeAnimal); 
         return adocao; 
     }
 
     @Override
     public List<ListarAdocao> buscarAdocaoPorClassificacao(String nomeClassificacao) {
-        List<Adocao> adocao = (List<Adocao>) repositorioAdocao.findByClassificacao(nomeClassificacao);
+        List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorClassificacao(nomeClassificacao);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){
@@ -140,7 +140,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     public List<ListarAdocao> buscarAdocaoPorRaca(String nomeRaca) {
-        List<Adocao> adocao = (List<Adocao>) repositorioAdocao.findByRaca(nomeRaca);
+        List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorRaca(nomeRaca);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){
@@ -170,7 +170,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     public List<ListarAdocao> buscarAdocaoPorUsuarioAnunciador(String nomeUsuario) {
-         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.findByUsuarioAnunciador(nomeUsuario);
+         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorUsuarioAnunciador(nomeUsuario);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){
@@ -200,7 +200,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     public List<ListarAdocao> buscarPorUsuarioEscolhido(String nomeUsuario) {
-         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.findByUsuarioEscolhido(nomeUsuario);
+         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorEscolhido(nomeUsuario);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){
@@ -230,7 +230,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     public List<ListarAdocao> buscarPorData(Date data) {
-         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.findByDataAnuncio(data);
+         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorDataAnuncio(data);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){

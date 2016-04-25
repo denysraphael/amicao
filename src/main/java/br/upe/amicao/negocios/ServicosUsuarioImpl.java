@@ -132,7 +132,7 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
     @Override
     public List<ListarUsuario> BuscarUsuarioPorNome(String nome) throws UsuarioInexistenteException {
         List<ListarUsuario> retorno = new ArrayList<ListarUsuario>();
-        List<Usuario> pesquisa = repositorioUsuario.findByNome(nome);
+        List<Usuario> pesquisa = repositorioUsuario.buscarPorNome(nome);
          for(int i = 0; i < pesquisa.size(); i++){
             if(pesquisa.get(i).isAtivo()){
                 ListarUsuario lu = new ListarUsuario();

@@ -71,11 +71,11 @@ public class ServicosAnimalImpl implements ServicosAnimal {
 
     @Override
     public List<Animal> buscarAnimalPorClassificacao(String nomeClassificacao) {
-        return(List<Animal>) repositorioAnimal.findByClassificao(nomeClassificacao);
+        return(List<Animal>) repositorioAnimal.buscarPorClassificao(nomeClassificacao);
     }
 
     @Override
     public List<Animal> buscarAnimalPorRaca(String nomeRaca) {
-        return(List<Animal>) repositorioAnimal.findByRaca(nomeRaca);
+        return(List<Animal>) repositorioAnimal.buscarPorRaca(nomeRaca);
     }
 }

@@ -18,8 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioAnimal extends CrudRepository<Animal, Long> {
     @Query("select a from Animal a where a.classificao.nome=:nomeClassificacao")
-    public List<Animal> findByClassificao(String nomeCategoria);
+    public List<Animal> buscarPorClassificao(String nomeCategoria);
     @Query("select a from Animal a where a.raca.nome=:nomeRaca")
-    public List<Animal> findByRaca(String nomeRaca);
+    public List<Animal> buscarPorRaca(String nomeRaca);
     public List<Animal> findByNome(String nome);
 }

@@ -20,6 +20,6 @@ import org.springframework.stereotype.Repository;
 public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
     public Usuario findByEmail(String email);
     @Query("Select u from Usuario u where u.nome like '%nomeUsuario%'")
-    public List<Usuario> findByNome(@Param("nomeUsuario")String nomeUsuario);
+    public List<Usuario> buscarPorNome(@Param("nomeUsuario")String nomeUsuario);
     public Usuario findByEmailAndSenha(String email, String senha);
 }

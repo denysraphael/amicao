@@ -61,7 +61,7 @@ public class ServicosRacaImpl implements ServicosRaca{
 
     @Override
     public List<Raca> buscarRacaPorClassificacao(String classificacaoNome) {
-        return(List<Raca>) repositorioRaca.findByClassificacao(classificacaoNome);
+        return(List<Raca>) repositorioRaca.buscarPorClassificacao(classificacaoNome);
     }
     
 }

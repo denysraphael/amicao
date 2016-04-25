@@ -19,5 +19,5 @@ import org.springframework.stereotype.Repository;
 public interface RepositorioRaca extends CrudRepository<Raca, Long>{
     public Raca findByNome(String nome);
     @Query("select r from Raca r where r.classificacao.nome=:nomeClassificacao")
-    public List<Raca> findByClassificacao(String nomeClassificacao);
+    public List<Raca> buscarPorClassificacao(String nomeClassificacao);
 }
