@@ -5,6 +5,9 @@
  */
 package br.upe.amicao.negocios;
 
+import br.upe.amicao.listar.ListarUsuario;
+import br.upe.amicao.exceptions.UsuarioExistenteException;
+import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.persistencia.RepositorioUsuario;
 import java.util.ArrayList;
@@ -28,8 +31,8 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
         if(us!=null){
             if(!us.isAtivo()){
                 us.setAtivo(true);
-                us.setTelefone(usuario.getTelefone());
                 us.setNome(usuario.getNome());
+                us.setTelefone(usuario.getTelefone());
                 us.setSenha(usuario.getSenha());
                 atualizarUsuario(us, us.getEmail());
             }else{
@@ -47,13 +50,13 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
             throw new UsuarioInexistenteException();
         }
         else{
-            usuarioAtualizar.setTelefone(usuario.getTelefone());
             usuarioAtualizar.setNome(usuario.getNome());
             usuarioAtualizar.setSenha(usuario.getSenha());
+            usuarioAtualizar.setTelefone(usuario.getTelefone());
             usuarioAtualizar.setAnimais(usuario.getAnimais());
             usuarioAtualizar.setAdocoesAnunciadas(usuario.getAdocoesAnunciadas());
             usuarioAtualizar.setAdocoesInteressadas(usuario.getAdocoesInteressadas());
-            usuarioAtualizar.setAdocoes(usuario.getAdocoes());
+            usuarioAtualizar.setAdocoesRealizadas(usuario.getAdocoesRealizadas());
             usuarioAtualizar.setAtivo(usuario.isAtivo());
             repositorioUsuario.save(usuarioAtualizar);
         }
@@ -104,13 +107,13 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
                     }
                     lu.setAdocoesInteressadas(adocoesInteressadas);
                 }
-                if(pesquisa.get(i).getAdocoes()!=null){
-                    List<String> adocoes = new ArrayList<String>();
-                    for(int j = 0; j < pesquisa.get(i).getAdocoes().size(); j++){
-                        String nome = pesquisa.get(i).getAdocoes().get(j).getAnimal().getNome();
-                        adocoes.add(nome);
+                if(pesquisa.get(i).getAdocoesRealizadas()!=null){
+                    List<String> adocoesRealizadas = new ArrayList<String>();
+                    for(int j = 0; j < pesquisa.get(i).getAdocoesRealizadas().size(); j++){
+                        String nome = pesquisa.get(i).getAdocoesRealizadas().get(j).getAnimal().getNome();
+                        adocoesRealizadas.add(nome);
                     }
-                    lu.setAdocoes(adocoes);
+                    lu.setAdocoesRealizadas(adocoesRealizadas);
                 }
                 retorno.add(lu);
             }
@@ -162,13 +165,13 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
                     }
                     lu.setAdocoesInteressadas(adocoesInteressadas);
                 }
-                if(pesquisa.get(i).getAdocoes()!=null){
-                    List<String> adocoes = new ArrayList<String>();
-                    for(int j = 0; j < pesquisa.get(i).getAdocoes().size(); j++){
-                        String nome2 = pesquisa.get(i).getAdocoes().get(j).getAnimal().getNome();
-                        adocoes.add(nome);
+                if(pesquisa.get(i).getAdocoesRealizadas()!=null){
+                    List<String> adocoesRealizadas = new ArrayList<String>();
+                    for(int j = 0; j < pesquisa.get(i).getAdocoesRealizadas().size(); j++){
+                        String nome2 = pesquisa.get(i).getAdocoesRealizadas().get(j).getAnimal().getNome();
+                        adocoesRealizadas.add(nome);
                     }
-                    lu.setAdocoes(adocoes);
+                    lu.setAdocoesRealizadas(adocoesRealizadas);
                 }
                 retorno.add(lu);
             }

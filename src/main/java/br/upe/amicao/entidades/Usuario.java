@@ -16,8 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 /**
  *
  * @author -Denys
@@ -33,7 +31,7 @@ public class Usuario implements Serializable {
     private List<Animal> animais;
     private List<Adocao> adocoesAnunciadas;
     private List<Adocao> adocoesInteressadas;
-    private List<Adocao> adocoes;
+    private List<Adocao> adocoesRealizadas;
     private boolean ativo;
     
      public Usuario(String email, String nome, String senha, String telefone) {
@@ -45,7 +43,7 @@ public class Usuario implements Serializable {
         this.animais = new ArrayList<Animal>();
         this.adocoesAnunciadas = new ArrayList<Adocao>();
         this.adocoesInteressadas = new ArrayList<Adocao>();
-        this.adocoes = new ArrayList<Adocao>();
+        this.adocoesRealizadas = new ArrayList<Adocao>();
     }
 
     public Usuario() {
@@ -103,13 +101,13 @@ public class Usuario implements Serializable {
         this.animais = animais;
     }
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "usuarioAnunciador")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioAnunciador")
     public List<Adocao> getAdocoesAnunciadas() {
         return adocoesAnunciadas;
     }
 
-    public void setAdocoesAnunciadas(List<Adocao> anunciosAdocoes) {
-        this.adocoesAnunciadas = anunciosAdocoes;
+    public void setAdocoesAnunciadas(List<Adocao> adocoesAnunciadas) {
+        this.adocoesAnunciadas = adocoesAnunciadas;
     }
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "interessados")
@@ -122,14 +120,14 @@ public class Usuario implements Serializable {
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioEscolhido")
-    public List<Adocao> getAdocoes() {
-        return adocoes;
-    }
-    
-    public void setAdocoes(List<Adocao> adocoes) {
-        this.adocoes = adocoes;
+    public List<Adocao> getAdocoesRealizadas() {
+        return adocoesRealizadas;
     }
 
+    public void setAdocoesRealizadas(List<Adocao> adocoesRealizadas) {
+        this.adocoesRealizadas = adocoesRealizadas;
+    }
+    
     public boolean isAtivo() {
         return ativo;
     }
@@ -141,16 +139,16 @@ public class Usuario implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.codigo);
-        hash = 53 * hash + Objects.hashCode(this.email);
-        hash = 53 * hash + Objects.hashCode(this.nome);
-        hash = 53 * hash + Objects.hashCode(this.senha);
-        hash = 53 * hash + Objects.hashCode(this.telefone);
-        hash = 53 * hash + Objects.hashCode(this.animais);
-        hash = 53 * hash + Objects.hashCode(this.adocoesAnunciadas);
-        hash = 53 * hash + Objects.hashCode(this.adocoesInteressadas);
-        hash = 53 * hash + Objects.hashCode(this.adocoes);
-        hash = 53 * hash + (this.ativo ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.codigo);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + Objects.hashCode(this.nome);
+        hash = 23 * hash + Objects.hashCode(this.senha);
+        hash = 23 * hash + Objects.hashCode(this.telefone);
+        hash = 23 * hash + Objects.hashCode(this.animais);
+        hash = 23 * hash + Objects.hashCode(this.adocoesAnunciadas);
+        hash = 23 * hash + Objects.hashCode(this.adocoesInteressadas);
+        hash = 23 * hash + Objects.hashCode(this.adocoesRealizadas);
+        hash = 23 * hash + (this.ativo ? 1 : 0);
         return hash;
     }
 
@@ -187,7 +185,7 @@ public class Usuario implements Serializable {
         if (!Objects.equals(this.adocoesInteressadas, other.adocoesInteressadas)) {
             return false;
         }
-        if (!Objects.equals(this.adocoes, other.adocoes)) {
+        if (!Objects.equals(this.adocoesRealizadas, other.adocoesRealizadas)) {
             return false;
         }
         if (this.ativo != other.ativo) {
@@ -198,6 +196,6 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "codigo=" + codigo + ", email=" + email + ", nome=" + nome + ", senha=" + senha + ", telefone=" + telefone + ", animais=" + animais + ", adocoesAnunciadas=" + adocoesAnunciadas + ", adocoesInteressadas=" + adocoesInteressadas + ", adocoes=" + adocoes + ", ativo=" + ativo + '}';
+        return "Usuario{" + "codigo=" + codigo + ", email=" + email + ", nome=" + nome + ", senha=" + senha + ", telefone=" + telefone + ", animais=" + animais + ", adocoesAnunciadas=" + adocoesAnunciadas + ", adocoesInteressadas=" + adocoesInteressadas + ", adocoesRealizadas=" + adocoesRealizadas + ", ativo=" + ativo + '}';
     }
 }

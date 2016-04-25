@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.upe.amicao.negocios;
+package br.upe.amicao.listar;
 
-import br.upe.amicao.entidades.Adocao;
-import br.upe.amicao.entidades.Animal;
 import java.util.List;
 
 /**
@@ -22,10 +20,10 @@ public class ListarUsuario {
     private List<String> animais;
     private List<String> adocoesAnunciadas;
     private List<String> adocoesInteressadas;
-    private List<String> adocoes;
+    private List<String> adocoesRealizadas;
     private boolean ativo;
 
-    public ListarUsuario(Long codigo, String email, String nome, String senha, String telefone, List<String> animais, List<String> adocoesAnunciadas, List<String> adocoesInteressadas, List<String> adocoes, boolean ativo) {
+    public ListarUsuario(Long codigo, String email, String nome, String senha, String telefone, List<String> animais, List<String> adocoesAnunciadas, List<String> adocoesInteressadas, List<String> adocoesRealizadas, boolean ativo) {
         this.codigo = codigo;
         this.email = email;
         this.nome = nome;
@@ -34,10 +32,10 @@ public class ListarUsuario {
         this.animais = animais;
         this.adocoesAnunciadas = adocoesAnunciadas;
         this.adocoesInteressadas = adocoesInteressadas;
-        this.adocoes = adocoes;
+        this.adocoesRealizadas = adocoesRealizadas;
         this.ativo = ativo;
     }
-    
+
     public ListarUsuario() {
     }
 
@@ -105,12 +103,12 @@ public class ListarUsuario {
         this.adocoesInteressadas = adocoesInteressadas;
     }
 
-    public List<String> getAdocoes() {
-        return adocoes;
+    public List<String> getAdocoesRealizadas() {
+        return adocoesRealizadas;
     }
 
-    public void setAdocoes(List<String> adocoes) {
-        this.adocoes = adocoes;
+    public void setAdocoesRealizadas(List<String> adocoesRealizadas) {
+        this.adocoesRealizadas = adocoesRealizadas;
     }
 
     public boolean isAtivo() {
@@ -121,5 +119,7 @@ public class ListarUsuario {
         this.ativo = ativo;
     }
 
+    
+   
     
 }

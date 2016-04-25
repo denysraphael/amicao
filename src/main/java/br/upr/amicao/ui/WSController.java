@@ -6,7 +6,7 @@
 package br.upr.amicao.ui;
 
 import br.upe.amicao.entidades.Usuario;
-import br.upe.amicao.negocios.ListarUsuario;
+import br.upe.amicao.listar.ListarUsuario;
 import br.upe.amicao.negocios.ServicosFachada;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

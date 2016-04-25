@@ -5,6 +5,9 @@
  */
 package br.upe.amicao.negocios;
 
+import br.upe.amicao.exceptions.RacaInexistenteException;
+import br.upe.amicao.exceptions.RacaExistenteException;
+import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.persistencia.RepositorioRaca;

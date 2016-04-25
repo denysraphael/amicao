@@ -10,11 +10,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author -Denys
  */
+@Repository
 public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
     public Usuario findByEmail(String email);
     @Query("Select u from Usuario u where u.nome like '%nomeUsuario%'")

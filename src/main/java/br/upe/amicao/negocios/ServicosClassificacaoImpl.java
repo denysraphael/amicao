@@ -5,6 +5,8 @@
  */
 package br.upe.amicao.negocios;
 
+import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
+import br.upe.amicao.exceptions.ClassificacaoExistenteException;
 import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.persistencia.RepositorioClassificacao;
 import java.util.List;

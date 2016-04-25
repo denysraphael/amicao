@@ -5,6 +5,9 @@
  */
 package br.upe.amicao.negocios;
 
+import br.upe.amicao.exceptions.RacaInexistenteException;
+import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
+import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.entidades.Animal;
 import java.io.Serializable;
 import java.util.List;

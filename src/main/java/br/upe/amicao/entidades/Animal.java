@@ -5,19 +5,24 @@
  */
 package br.upe.amicao.entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author -Denys
  */
-public class Animal {
+@Entity
+public class Animal implements Serializable {
     private Long codigo;
     private Classificacao classificacao;
     private String nome;
@@ -80,13 +85,15 @@ public class Animal {
         this.caracteristicas = caracteristicas;
     }
 
+    @Temporal(TemporalType.DATE)
     public Date getDataNascimento() {
         return dataNascimento;
     }
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
+    }    
+    
 
     @Override
     public int hashCode() {

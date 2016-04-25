@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.upe.amicao.negocios;
+package br.upe.amicao.listar;
 
-import br.upe.amicao.entidades.Adocao;
-import br.upe.amicao.entidades.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
  */
 public class ListarAdocao {
     
-    private Long codigo;
+     private Long codigo;
     private String animal;
     private String usuarioAnunciador;
     private String usuarioEscolhido;
@@ -28,24 +26,13 @@ public class ListarAdocao {
 
     public ListarAdocao(Long codigo, String animal, String usuarioAnunciador, String usuarioEscolhido, List<String> interessados, Date dataAnuncio, Date dataInteressado, boolean ativo) {
         this.codigo = codigo;
+        this.animal = animal;
         this.usuarioAnunciador = usuarioAnunciador;
         this.usuarioEscolhido = usuarioEscolhido;
         this.interessados = interessados;
         this.dataAnuncio = dataAnuncio;
         this.dataInteressado = dataInteressado;
         this.ativo = ativo;
-    }
-
-   public ListarAdocao(Adocao a) {
-        this.codigo = a.getCodigo();
-        this.usuarioAnunciador = a.getUsuarioAnunciador().getNome();
-        this.interessados = new ArrayList<String>();
-        for (Usuario interessado : a.getInteressados()) {
-            this.interessados.add(interessado.getNome());
-        }
-        this.usuarioEscolhido = a.getUsuarioEscolhido()!= null ? a.getUsuarioEscolhido().getNome():null;
-        this.dataAnuncio = a.getDataAnuncio();
-        this.dataInteressado = a.getDataInteressado();        
     }
 
     public ListarAdocao() {

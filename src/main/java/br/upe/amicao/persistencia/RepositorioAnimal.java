@@ -9,11 +9,13 @@ import br.upe.amicao.entidades.Animal;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author -Denys
  */
+@Repository
 public interface RepositorioAnimal extends CrudRepository<Animal, Long> {
     @Query("select a from Animal a where a.classificao.nome=:nomeClassificacao")
     public List<Animal> findByClassificao(String nomeCategoria);

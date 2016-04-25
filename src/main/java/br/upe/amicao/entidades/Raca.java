@@ -5,7 +5,10 @@
  */
 package br.upe.amicao.entidades;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +20,8 @@ import javax.persistence.OneToMany;
  *
  * @author -Denys
  */
-public class Raca {
+@Entity
+public class Raca implements Serializable {
     private Long codigo;
     private String nome;
     private Classificacao classificacao;
@@ -55,12 +59,13 @@ public class Raca {
     public void setClassificacao(Classificacao classificacao) {
         this.classificacao = classificacao;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.codigo);
-        hash = 97 * hash + Objects.hashCode(this.nome);
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.codigo);
+        hash = 47 * hash + Objects.hashCode(this.nome);
+        hash = 47 * hash + Objects.hashCode(this.classificacao);
         return hash;
     }
 
@@ -79,11 +84,15 @@ public class Raca {
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
+        if (!Objects.equals(this.classificacao, other.classificacao)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Raca{" + "codigo=" + codigo + ", nome=" + nome + '}';
-    }    
+        return "Raca{" + "codigo=" + codigo + ", nome=" + nome + ", classificacao=" + classificacao +'}';
+    }
+  
 }

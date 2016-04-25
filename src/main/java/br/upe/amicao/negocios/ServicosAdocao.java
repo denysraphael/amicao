@@ -5,8 +5,15 @@
  */
 package br.upe.amicao.negocios;
 
+import br.upe.amicao.listar.ListarAdocao;
+import br.upe.amicao.exceptions.RacaInexistenteException;
+import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
+import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
+import br.upe.amicao.exceptions.AdocaoInexistenteException;
+import br.upe.amicao.exceptions.AdocaoExistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
+import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

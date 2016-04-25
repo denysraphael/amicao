@@ -6,12 +6,13 @@
 package br.upe.amicao.persistencia;
 
 import br.upe.amicao.entidades.Adocao;
-import br.upe.amicao.negocios.ListarAdocao;
+import br.upe.amicao.listar.ListarAdocao;
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -19,7 +20,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RepositorioAdocao extends CrudRepository<Adocao, Long>{
     
-    @Query("select new br.upe.amicao.listar.AdocaoListar(a) from Adocao a where a.animal.nome=:nomeAnimal")
+    @Query("select from Adocao a where a.animal.nome=:nomeAnimal")
     public List<ListarAdocao> findByAnimal(@Param("nomeAnimal") String nomeAnimal);
     @Query("select a from Adocao a where a.animal.classificacao.nome=:nomeClassificacao ")
     public List<Adocao> findByClassificacao(@Param("nomeClassificacao") String nomeClassificacao); 

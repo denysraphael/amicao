@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.upe.amicao.negocios;
+package br.upe.amicao.exceptions;
 
 /**
  *
  * @author -Denys
  */
-public class RacaExistenteException extends Exception {
+public class UsuarioInexistenteException extends Exception {
     
 }
