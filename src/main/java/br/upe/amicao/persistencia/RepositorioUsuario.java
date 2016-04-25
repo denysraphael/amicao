@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author -Denys
  */
-@Repository
 public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
     public Usuario findByEmail(String email);
     @Query("Select u from Usuario u where u.nome like '%nomeUsuario%'")

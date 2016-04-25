@@ -19,7 +19,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RepositorioAdocao extends CrudRepository<Adocao, Long>{
     
-    @Query("select from Adocao a where a.animal.nome=:nomeAnimal")
+    @Query("select new br.upe.amicao.listar.ListarAdocao(a) from Adocao a where a.animal.nome=:nomeAnimal")
     public List<ListarAdocao> buscarPorAnimal(@Param("nomeAnimal") String nomeAnimal);
     @Query("select a from Adocao a where a.animal.classificacao.nome=:nomeClassificacao ")
     public List<Adocao> buscarPorClassificacao(@Param("nomeClassificacao") String nomeClassificacao); 
