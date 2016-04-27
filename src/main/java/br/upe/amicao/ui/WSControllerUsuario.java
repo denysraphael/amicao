@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.upr.amicao.ui;
+package br.upe.amicao.ui;
 
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.UsuarioExistenteException;
