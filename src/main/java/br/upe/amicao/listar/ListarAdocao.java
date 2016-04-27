@@ -5,6 +5,7 @@
  */
 package br.upe.amicao.listar;
 
+import br.upe.amicao.entidades.Adocao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class ListarAdocao {
     
-     private Long codigo;
+    private Long codigo;
     private String animal;
     private String usuarioAnunciador;
     private String usuarioEscolhido;
@@ -37,7 +38,18 @@ public class ListarAdocao {
 
     public ListarAdocao() {
     }
-
+    
+    public ListarAdocao(Adocao a){
+        this.codigo = a.getCodigo();
+        this.animal = a.getAnimal().getNome();
+        this.usuarioAnunciador = a.getUsuarioAnunciador().getNome();
+        this.usuarioEscolhido = a.getUsuarioEscolhido().getNome();
+        //this.interessados = a.getInteressados();
+        this.dataAnuncio = a.getDataAnuncio();
+        this.dataInteressado = a.getDataInteressado();
+        this.ativo = a.isAtivo();
+    }
+    
     public Long getCodigo() {
         return codigo;
     }
