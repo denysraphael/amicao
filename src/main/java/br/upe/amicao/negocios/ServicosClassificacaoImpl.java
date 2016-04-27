@@ -12,6 +12,7 @@ import br.upe.amicao.persistencia.RepositorioClassificacao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -24,6 +25,7 @@ public class ServicosClassificacaoImpl implements ServicosClassificacao{
     private RepositorioClassificacao repositorioClassificacao;
      
     @Override
+    @Transactional(rollbackFor = ClassificacaoExistenteException.class)
     public void cadastrarClassificacao(Classificacao classificacao) throws ClassificacaoExistenteException {
         if(repositorioClassificacao.findByNome(classificacao.getNome())!=null) 
             throw new ClassificacaoExistenteException();
@@ -31,6 +33,7 @@ public class ServicosClassificacaoImpl implements ServicosClassificacao{
     }
 
     @Override
+    @Transactional(rollbackFor = ClassificacaoInexistenteException.class)
     public void atualizarClassificacao(String nomeAtual, String nomeAtualizar) throws ClassificacaoInexistenteException {
         Classificacao classificacaoAtualizar = repositorioClassificacao.findByNome(nomeAtual);
         if(classificacaoAtualizar==null){
@@ -52,5 +55,4 @@ public class ServicosClassificacaoImpl implements ServicosClassificacao{
         }
         return repositorioClassificacao.findByNome(nome);
     }
-    
 }

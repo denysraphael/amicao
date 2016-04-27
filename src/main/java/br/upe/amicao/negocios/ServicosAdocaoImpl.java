@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -42,6 +43,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
     private ServicosAnimal servicosAnimal;
     
     @Override
+    @Transactional(rollbackFor = UsuarioInexistenteException.class)
     public void cadastrarAdocao(Adocao adocao, Animal animal, String email, String nomeClassificacao, String nomeRaca) throws UsuarioInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException {
         Usuario usuario = servicosUsuario.BuscarUsuarioPorEmail(email);
         List<Adocao> listaAdocao = usuario.getAdocoesAnunciadas();
@@ -62,6 +64,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
     }
 
     @Override
+    @Transactional(rollbackFor = AdocaoInexistenteException.class)
     public void excluirAdocao(Long id) throws AdocaoInexistenteException {
         Adocao adocao = buscarAdocaoPorCodigo(id);
         if(adocao==null){
@@ -259,6 +262,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
     }
 
     @Override
+    @Transactional(rollbackFor = UsuarioInexistenteException.class)
     public void interesseAdocao(String email, long codigo) throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoExistenteException {
         Adocao adocao = new Adocao();
         Usuario usuario = new Usuario();
@@ -289,6 +293,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
     }
 
     @Override
+    @Transactional(rollbackFor = UsuarioInexistenteException.class)
     public void realizarAdocao() throws UsuarioInexistenteException {
         List<Adocao> listaAdocao = (List<Adocao>) repositorioAdocao.findAll();
         for(int i= 0; i< listaAdocao.size(); i++){ 

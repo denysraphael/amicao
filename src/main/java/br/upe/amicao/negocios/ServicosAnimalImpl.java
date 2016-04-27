@@ -9,10 +9,12 @@ import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.entidades.Animal;
+import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import br.upe.amicao.persistencia.RepositorioAnimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -30,6 +32,7 @@ public class ServicosAnimalImpl implements ServicosAnimal {
     
     
     @Override
+    @Transactional(rollbackFor = ClassificacaoInexistenteException.class)
     public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome) throws ClassificacaoInexistenteException, RacaInexistenteException {
         animal.setClassificacao(servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome));
         animal.setRaca(servicosRaca.buscarRacaPorNome(racaNome));
@@ -38,6 +41,7 @@ public class ServicosAnimalImpl implements ServicosAnimal {
     }
 
     @Override
+    @Transactional(rollbackFor = AnimalInexistenteException.class)
     public void atualizarAnimal(Animal animal, Long codigoAtualizado, String classificacaoNome, String racaNome) throws AnimalInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException {
         Animal animalAtualizar = repositorioAnimal.findOne(animal.getCodigo());
         if(animalAtualizar==null){
@@ -50,6 +54,7 @@ public class ServicosAnimalImpl implements ServicosAnimal {
     }
 
     @Override
+    @Transactional(rollbackFor = AnimalInexistenteException.class)
     public void deletarAnimal(Long codigo) throws AnimalInexistenteException {
         repositorioAnimal.delete(codigo);
     }

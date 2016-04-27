@@ -8,12 +8,12 @@ package br.upe.amicao.negocios;
 import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.RacaExistenteException;
 import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
-import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.persistencia.RepositorioRaca;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -28,6 +28,7 @@ public class ServicosRacaImpl implements ServicosRaca{
     private ServicosClassificacao servicosClassificacao;
       
     @Override
+    @Transactional(rollbackFor = RacaExistenteException.class)
     public void cadastrarRaca(Raca raca, String classificacaoNome) throws RacaExistenteException, ClassificacaoInexistenteException {
         if(repositorioRaca.findByNome(raca.getNome())!=null){
             throw new RacaExistenteException();
@@ -39,6 +40,7 @@ public class ServicosRacaImpl implements ServicosRaca{
     }
 
     @Override
+    @Transactional(rollbackFor = RacaInexistenteException.class)
     public void atualizarRaca(String nomeAtual, String nomeAtualizar,String classificacaoNome) throws RacaInexistenteException, ClassificacaoInexistenteException {
         Raca racaAtualizar = repositorioRaca.findByNome(nomeAtual);
         if(racaAtualizar==null){

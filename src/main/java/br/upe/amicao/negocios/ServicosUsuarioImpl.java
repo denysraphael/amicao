@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -24,8 +25,7 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
 
     @Autowired
     private RepositorioUsuario repositorioUsuario;
-     
-    @Override
+    @Transactional(rollbackFor = UsuarioExistenteException.class)
     public void cadastrarUsuario(Usuario usuario) throws UsuarioExistenteException, UsuarioInexistenteException {
         Usuario us = repositorioUsuario.findByEmail(usuario.getEmail());
         if(us!=null){
@@ -44,6 +44,7 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
     }
 
     @Override
+    @Transactional(rollbackFor = UsuarioInexistenteException.class)
     public void atualizarUsuario(Usuario usuario, String emailAtualizar) throws UsuarioInexistenteException {
         Usuario usuarioAtualizar = repositorioUsuario.findByEmail(usuario.getEmail());
         if(usuarioAtualizar==null){
@@ -63,6 +64,7 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
     }
 
     @Override
+    @Transactional(rollbackFor = UsuarioInexistenteException.class)
     public void excluirUsuario(String email) throws UsuarioInexistenteException {
         Usuario usuarioAtualizar = repositorioUsuario.findByEmail(email);
         if(usuarioAtualizar==null)
