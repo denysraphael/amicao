@@ -101,7 +101,7 @@ public class Usuario implements Serializable {
         this.animais = animais;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioAnunciador")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "anunciador")
     public List<Adocao> getAdocoesAnunciadas() {
         return adocoesAnunciadas;
     }
@@ -119,7 +119,7 @@ public class Usuario implements Serializable {
         this.adocoesInteressadas = adocoesInteressadas;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioEscolhido")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "adotante")
     public List<Adocao> getAdocoesRealizadas() {
         return adocoesRealizadas;
     }

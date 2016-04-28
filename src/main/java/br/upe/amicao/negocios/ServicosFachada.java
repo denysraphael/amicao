@@ -16,12 +16,12 @@ import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.ClassificacaoExistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
-import br.upe.amicao.exceptions.AdocaoExistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
+import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -41,18 +41,18 @@ public interface ServicosFachada extends Serializable{
     public List<ListarUsuario> BuscarUsuarioPorNome(String nome) throws UsuarioInexistenteException;
     
     //Adocao
-    public void cadastrarAdocao(Adocao adocao, Animal animal, String email, String nomeClassificacao, String nomeRaca) throws UsuarioInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException;
+   public void cadastrarAdocao(Adocao adocao, Animal animal, String email, String nomeClassificacao, String nomeRaca) throws UsuarioInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException;
     public void excluirAdocao(Long codigo) throws AdocaoInexistenteException;
     public List<ListarAdocao> listarAdocao();
     public List<ListarAdocao> buscarAdocaoPorAnimal(String nomeAnimal);
     public List<ListarAdocao> buscarAdocaoPorClassificacao(String nomeClassificacao);
     public List<ListarAdocao> buscarAdocaoPorRaca(String nomeRaca);
-    public List<ListarAdocao> buscarAdocaoPorUsuarioAnunciador(String nomeUsuario);
-    public List<ListarAdocao> buscarPorUsuarioEscolhido(String nomeUsuario);
+    public List<ListarAdocao> buscarAdocaoPorAnunciador(String nomeAnunciador);
+    public List<ListarAdocao> buscarAdocaoPorAdotante(String nomeAdotante);
     public List<ListarAdocao> buscarPorData(Date data);
     public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException;
-    public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoExistenteException;
-    public void realizarAdocao() throws UsuarioInexistenteException;
+    public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException;
+    public void escolherAdotante() throws UsuarioInexistenteException;
     
     //Animal
     public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome)throws ClassificacaoInexistenteException, RacaInexistenteException;

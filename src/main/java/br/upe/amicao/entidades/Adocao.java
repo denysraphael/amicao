@@ -29,16 +29,17 @@ public class Adocao implements Serializable{
     
     private Long codigo;
     private Animal animal;
-    private Usuario usuarioAnunciador;
-    private Usuario usuarioEscolhido;
+    private Usuario anunciador;
+    private Usuario adotante;
     private List<Usuario> interessados;
     private Date dataAnuncio;
     private Date dataInteressado;
     private boolean ativo; 
     
-    public Adocao(Animal animal, Date dataAnuncio, List<Usuario> interessados,Usuario usuarioEscolhido, Date dataInteressado) {
-        this.interessados=interessados;
-        this.usuarioEscolhido = usuarioEscolhido;
+    public Adocao(Animal animal, Date dataAnuncio, List<Usuario> interessados,Usuario adotado, Date dataInteressado) {
+        this.animal = animal;
+        this.interessados = interessados;
+        this.adotante = adotante;
         this.dataInteressado = dataInteressado;
     }
 
@@ -65,21 +66,21 @@ public class Adocao implements Serializable{
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    public Usuario getUsuarioAnunciador() {
-        return usuarioAnunciador;
+    public Usuario getAnunciador() {
+        return anunciador;
     }
 
-    public void setUsuarioAnunciador(Usuario usuarioAnunciador) {
-        this.usuarioAnunciador = usuarioAnunciador;
+    public void setAnunciador(Usuario anunciador) {
+        this.anunciador = anunciador;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    public Usuario getUsuarioEscolhido() {
-        return usuarioEscolhido;
+    public Usuario getAdotante() {
+        return adotante;
     }
 
-    public void setUsuarioEscolhido(Usuario usuarioEscolhido) {
-        this.usuarioEscolhido = usuarioEscolhido;
+    public void setAdotante(Usuario adotante) {
+        this.adotante = adotante;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -120,14 +121,14 @@ public class Adocao implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.codigo);
-        hash = 41 * hash + Objects.hashCode(this.animal);
-        hash = 41 * hash + Objects.hashCode(this.usuarioAnunciador);
-        hash = 41 * hash + Objects.hashCode(this.usuarioEscolhido);
-        hash = 41 * hash + Objects.hashCode(this.interessados);
-        hash = 41 * hash + Objects.hashCode(this.dataAnuncio);
-        hash = 41 * hash + Objects.hashCode(this.dataInteressado);
-        hash = 41 * hash + (this.ativo ? 1 : 0);
+        hash = 67 * hash + Objects.hashCode(this.codigo);
+        hash = 67 * hash + Objects.hashCode(this.animal);
+        hash = 67 * hash + Objects.hashCode(this.anunciador);
+        hash = 67 * hash + Objects.hashCode(this.adotante);
+        hash = 67 * hash + Objects.hashCode(this.interessados);
+        hash = 67 * hash + Objects.hashCode(this.dataAnuncio);
+        hash = 67 * hash + Objects.hashCode(this.dataInteressado);
+        hash = 67 * hash + (this.ativo ? 1 : 0);
         return hash;
     }
 
@@ -146,10 +147,10 @@ public class Adocao implements Serializable{
         if (!Objects.equals(this.animal, other.animal)) {
             return false;
         }
-        if (!Objects.equals(this.usuarioAnunciador, other.usuarioAnunciador)) {
+        if (!Objects.equals(this.anunciador, other.anunciador)) {
             return false;
         }
-        if (!Objects.equals(this.usuarioEscolhido, other.usuarioEscolhido)) {
+        if (!Objects.equals(this.adotante, other.adotante)) {
             return false;
         }
         if (!Objects.equals(this.interessados, other.interessados)) {
@@ -169,6 +170,6 @@ public class Adocao implements Serializable{
 
     @Override
     public String toString() {
-        return "Adocao{" + "Codigo=" + codigo + ", animal=" + animal + ", usuarioAnunciador=" + usuarioAnunciador + ", usuarioEscolhido=" + usuarioEscolhido + ", interessados=" + interessados + ", dataAnuncio=" + dataAnuncio + ", dataInteressado=" + dataInteressado + ", ativo=" + ativo + '}';
+        return "Adocao{" + "codigo=" + codigo + ", animal=" + animal + ", anunciador=" + anunciador + ", adotante=" + adotante + ", interessados=" + interessados + ", dataAnuncio=" + dataAnuncio + ", dataInteressado=" + dataInteressado + ", ativo=" + ativo + '}';
     }
 }

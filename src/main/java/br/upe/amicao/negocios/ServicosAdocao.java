@@ -5,12 +5,12 @@
  */
 package br.upe.amicao.negocios;
 
+import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import br.upe.amicao.listar.ListarAdocao;
 import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
-import br.upe.amicao.exceptions.AdocaoExistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
@@ -30,10 +30,10 @@ public interface ServicosAdocao extends Serializable {
     public List<ListarAdocao> buscarAdocaoPorAnimal(String nomeAnimal);
     public List<ListarAdocao> buscarAdocaoPorClassificacao(String nomeClassificacao);
     public List<ListarAdocao> buscarAdocaoPorRaca(String nomeRaca);
-    public List<ListarAdocao> buscarAdocaoPorUsuarioAnunciador(String nomeUsuario);
-    public List<ListarAdocao> buscarPorUsuarioEscolhido(String nomeUsuario);
+    public List<ListarAdocao> buscarAdocaoPorAnunciador(String nomeAnunciador);
+    public List<ListarAdocao> buscarAdocaoPorAdotante(String nomeAdotante);
     public List<ListarAdocao> buscarPorData(Date data);
     public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException;
-    public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoExistenteException;
-    public void realizarAdocao() throws UsuarioInexistenteException;
+    public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException;
+    public void escolherAdotante() throws UsuarioInexistenteException;
 }

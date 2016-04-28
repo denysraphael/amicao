@@ -7,8 +7,8 @@ package br.upe.amicao.ui;
 
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
-import br.upe.amicao.exceptions.AdocaoExistenteException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
+import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.RacaInexistenteException;
@@ -58,10 +58,9 @@ public class WSControllerAdocao {
     }
     
     @RequestMapping(value="/remover",produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<?> excluirAdocao(Long id){
-        
+    public @ResponseBody ResponseEntity<?> excluirAdocao(Long codigo){ 
         try{
-            fachada.excluirAdocao(id);
+            fachada.excluirAdocao(codigo);
             return new ResponseEntity<String>(HttpStatus.OK);
         }catch(AdocaoInexistenteException e){
             return new ResponseEntity<AdocaoInexistenteException>(e,HttpStatus.BAD_REQUEST);
@@ -69,48 +68,48 @@ public class WSControllerAdocao {
     }
     
     @RequestMapping(value="/interesseAdocao",produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<?> interesseAdocao(String email,long id){
+    public @ResponseBody ResponseEntity<?> interesseAdocao(String email,long codigo){
         
         try{
-            fachada.interesseAdocao(email, id);
+            fachada.interesseAdocao(email, codigo);
             return new ResponseEntity<String>(HttpStatus.OK);
         }catch(UsuarioInexistenteException e){
            return new ResponseEntity<UsuarioInexistenteException>(e,HttpStatus.BAD_REQUEST);
         } catch (ProprioUsuarioAnunciadorException ex) {
             return new ResponseEntity<ProprioUsuarioAnunciadorException>(ex,HttpStatus.BAD_REQUEST);
-        } catch (AdocaoExistenteException ex) {
-            return new ResponseEntity<AdocaoExistenteException>(ex,HttpStatus.BAD_REQUEST);
+        } catch (AdocaoJaRealizadaException ex) {
+            return new ResponseEntity<AdocaoJaRealizadaException>(ex,HttpStatus.BAD_REQUEST);
         }
     }
     
     @RequestMapping(value = "/buscarPorAnimal")
-    public @ResponseBody List<ListarAdocao> buscarPorAnimal(String nomeAnimal) {
+    public @ResponseBody List<ListarAdocao> buscarAdocaoPorAnimal(String nomeAnimal) {
         return fachada.buscarAdocaoPorAnimal(nomeAnimal);
     }
     
     @RequestMapping(value = "/buscarPorClassificacao")
-    public @ResponseBody List<ListarAdocao> buscarPorClassificacao(String nomeClassificacao) {
+    public @ResponseBody List<ListarAdocao> buscarAdocaoPorClassificacao(String nomeClassificacao) {
         return fachada.buscarAdocaoPorClassificacao(nomeClassificacao);
     }
     
-    @RequestMapping(value = "/buscarPorRaca")
-    public @ResponseBody List<ListarAdocao> buscarPorRaca(String nomeRaca) {
+    @RequestMapping(value = "/buscarAdocaoPorRaca")
+    public @ResponseBody List<ListarAdocao> buscarAdocaoPorRaca(String nomeRaca) {
         return fachada.buscarAdocaoPorRaca(nomeRaca);
     }
     
-    @RequestMapping(value = "/buscarPorUsuarioAnunciador")
-    public @ResponseBody List<ListarAdocao> buscarPorUsuarioAnunciador(String nomeUsuarioAnunciador) {
-        return fachada.buscarAdocaoPorUsuarioAnunciador(nomeUsuarioAnunciador);
+    @RequestMapping(value = "/buscarPorAnunciador")
+    public @ResponseBody List<ListarAdocao> buscarAdocaoPorAnunciador(String nomeAnunciador) {
+        return fachada.buscarAdocaoPorAnunciador(nomeAnunciador);
     }
     
     
-    @RequestMapping(value = "/buscarPorUsuarioEscolhido")
-    public @ResponseBody List<ListarAdocao> buscarPorUsuarioEmprestado(String nomeUsuarioEscolhido) {
-        return fachada.buscarPorUsuarioEscolhido(nomeUsuarioEscolhido);
+    @RequestMapping(value = "/buscarPorAdotante")
+    public @ResponseBody List<ListarAdocao> buscarAdocaoPorAdotante(String nomeAdotante) {
+        return fachada.buscarAdocaoPorAdotante(nomeAdotante);
     }
     
     @RequestMapping(value = "/buscarPorData")
-    public @ResponseBody List<ListarAdocao> buscarPorData(Date data) {
+    public @ResponseBody List<ListarAdocao> buscarAdocaoPorData(Date data) {
         return fachada.buscarPorData(data);
     }
 }

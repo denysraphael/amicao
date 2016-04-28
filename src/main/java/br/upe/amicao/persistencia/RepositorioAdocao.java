@@ -31,9 +31,9 @@ public interface RepositorioAdocao extends CrudRepository<Adocao, Long>{
     @Query("select a from Adocao a where a.dataAnuncio=:dataAnuncio")
     public List<Adocao> buscarPorDataAnuncio(@Param("dataAnuncio") Date dataAnuncio);
     
-    @Query("select a from Adocao a where a.usuarioEscolhido.nome=:nomeUsuario")
-    public List<Adocao> buscarPorEscolhido(@Param("nomeUsuario") String nomeUsuario);
+    @Query("select a from Adocao a where a.adotante.nome=:nomeAdotante")
+    public List<Adocao> buscarPorAdotante(@Param("nomeAdotante") String nomeAdotante);
     
-    @Query("select a from Adocao a where a.usuarioAnunciador.nome=:nomeUsuario")
-    public List<Adocao> buscarPorUsuarioAnunciador(@Param("nomeUsuario") String nomeUsuario);
+    @Query("select a from Adocao a where a.anunciador.nome=:nomeAnunciador")
+    public List<Adocao> buscarPorAnunciador(@Param("nomeAnunciador") String nomeAnunciador);
 }

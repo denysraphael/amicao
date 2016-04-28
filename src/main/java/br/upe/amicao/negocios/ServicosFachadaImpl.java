@@ -16,12 +16,12 @@ import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.ClassificacaoExistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
-import br.upe.amicao.exceptions.AdocaoExistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
+import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,13 +106,13 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public List<ListarAdocao> buscarAdocaoPorUsuarioAnunciador(String nomeUsuario) {
-        return servicoAdocao.buscarAdocaoPorUsuarioAnunciador(nomeUsuario);
+    public List<ListarAdocao> buscarAdocaoPorAnunciador(String nomeAnunciador){
+        return servicoAdocao.buscarAdocaoPorAnunciador(nomeAnunciador);
     }
 
     @Override
-    public List<ListarAdocao> buscarPorUsuarioEscolhido(String nomeUsuario) {
-        return servicoAdocao.buscarPorUsuarioEscolhido(nomeUsuario);
+    public List<ListarAdocao> buscarAdocaoPorAdotante(String nomeAdotante) {
+        return servicoAdocao.buscarAdocaoPorAdotante(nomeAdotante);
     }
 
     @Override
@@ -126,13 +126,13 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public void interesseAdocao(String email, long codigo) throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoExistenteException {
+    public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException{
         servicoAdocao.interesseAdocao(email, codigo);
     }
 
     @Override
-    public void realizarAdocao() throws UsuarioInexistenteException {
-        servicoAdocao.realizarAdocao();
+    public void escolherAdotante() throws UsuarioInexistenteException {
+        servicoAdocao.escolherAdotante();
     }
 
     @Override

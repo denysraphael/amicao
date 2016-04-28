@@ -6,7 +6,6 @@
 package br.upe.amicao.listar;
 
 import br.upe.amicao.entidades.Adocao;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,18 +17,18 @@ public class ListarAdocao {
     
     private Long codigo;
     private String animal;
-    private String usuarioAnunciador;
-    private String usuarioEscolhido;
+    private String anunciador;
+    private String adotante;
     private List<String> interessados;
     private Date dataAnuncio;
     private Date dataInteressado;
     private boolean ativo; 
 
-    public ListarAdocao(Long codigo, String animal, String usuarioAnunciador, String usuarioEscolhido, List<String> interessados, Date dataAnuncio, Date dataInteressado, boolean ativo) {
+    public ListarAdocao(Long codigo, String animal, String anunciador, String adotante, List<String> interessados, Date dataAnuncio, Date dataInteressado, boolean ativo) {
         this.codigo = codigo;
         this.animal = animal;
-        this.usuarioAnunciador = usuarioAnunciador;
-        this.usuarioEscolhido = usuarioEscolhido;
+        this.anunciador = anunciador;
+        this.adotante = adotante;
         this.interessados = interessados;
         this.dataAnuncio = dataAnuncio;
         this.dataInteressado = dataInteressado;
@@ -38,18 +37,17 @@ public class ListarAdocao {
 
     public ListarAdocao() {
     }
-    
-    public ListarAdocao(Adocao a){
+
+     public ListarAdocao(Adocao a){
         this.codigo = a.getCodigo();
         this.animal = a.getAnimal().getNome();
-        this.usuarioAnunciador = a.getUsuarioAnunciador().getNome();
-        this.usuarioEscolhido = a.getUsuarioEscolhido().getNome();
-        //this.interessados = a.getInteressados();
+        this.anunciador = a.getAnunciador().getNome();
+        this.adotante = a.getAdotante().getNome();
         this.dataAnuncio = a.getDataAnuncio();
         this.dataInteressado = a.getDataInteressado();
         this.ativo = a.isAtivo();
     }
-    
+     
     public Long getCodigo() {
         return codigo;
     }
@@ -66,20 +64,20 @@ public class ListarAdocao {
         this.animal = animal;
     }
 
-    public String getUsuarioAnunciador() {
-        return usuarioAnunciador;
+    public String getAnunciador() {
+        return anunciador;
     }
 
-    public void setUsuarioAnunciador(String usuarioAnunciador) {
-        this.usuarioAnunciador = usuarioAnunciador;
+    public void setAnunciador(String anunciador) {
+        this.anunciador = anunciador;
     }
 
-    public String getUsuarioEscolhido() {
-        return usuarioEscolhido;
+    public String getAdotante() {
+        return adotante;
     }
 
-    public void setUsuarioEscolhido(String usuarioEscolhido) {
-        this.usuarioEscolhido = usuarioEscolhido;
+    public void setAdotante(String adotante) {
+        this.adotante = adotante;
     }
 
     public List<String> getInteressados() {
@@ -113,4 +111,5 @@ public class ListarAdocao {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+   
 }

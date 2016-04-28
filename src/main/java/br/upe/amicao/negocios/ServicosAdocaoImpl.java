@@ -12,10 +12,10 @@ import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
-import br.upe.amicao.exceptions.AdocaoExistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Usuario;
+import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import br.upe.amicao.persistencia.RepositorioAdocao;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,7 +49,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
         List<Adocao> listaAdocao = usuario.getAdocoesAnunciadas();
         try {    
             adocao.setAtivo(true);
-            adocao.setUsuarioAnunciador(usuario); 
+            adocao.setAnunciador(usuario); 
             servicosAnimal.cadastrarAnimal(animal, nomeClassificacao, nomeRaca);          
             adocao.setAnimal(servicosAnimal.consultarAnimalPorCodigo(animal.getCodigo()));
             repositorioAdocao.save(adocao);                                             
@@ -87,7 +87,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                 dl.setDataInteressado(adocao.get(i).getDataInteressado());
                 dl.setCodigo(adocao.get(i).getCodigo());
                 dl.setAnimal(adocao.get(i).getAnimal().getNome());
-                dl.setUsuarioAnunciador(adocao.get(i).getUsuarioAnunciador().getNome());
+                dl.setAnunciador(adocao.get(i).getAnunciador().getNome());
                 if(adocao.get(i).getInteressados() != null){
                     List<String> interessados = new ArrayList<String>();
                     for(int j = 0; j < adocao.get(i).getInteressados().size(); j++){
@@ -96,8 +96,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                     }
                     dl.setInteressados(interessados);
                 }
-                if(adocao.get(i).getUsuarioEscolhido()!= null){
-                    dl.setUsuarioEscolhido(adocao.get(i).getUsuarioEscolhido().getNome());
+                if(adocao.get(i).getAdotante()!= null){
+                    dl.setAdotante(adocao.get(i).getAdotante().getNome());
                 }
                 listaAdocao.add(dl); 
             }
@@ -123,7 +123,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
             dl.setDataInteressado(adocao.get(i).getDataInteressado());
             dl.setCodigo(adocao.get(i).getCodigo());
             dl.setAnimal(adocao.get(i).getAnimal().getNome());
-            dl.setUsuarioAnunciador(adocao.get(i).getUsuarioAnunciador().getNome());
+            dl.setAnunciador(adocao.get(i).getAnunciador().getNome());
             if(adocao.get(i).getInteressados() != null){
                 List<String> interessados = new ArrayList<String>();
                 for(int j = 0; j < adocao.get(i).getInteressados().size(); j++){
@@ -132,8 +132,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                 }
                 dl.setInteressados(interessados);
             }
-            if(adocao.get(i).getUsuarioEscolhido()!= null){
-                dl.setUsuarioEscolhido(adocao.get(i).getUsuarioEscolhido().getNome());
+            if(adocao.get(i).getAdotante()!= null){
+                dl.setAdotante(adocao.get(i).getAdotante().getNome());
             }
             listaAdocao.add(dl);
             }
@@ -153,7 +153,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
             dl.setDataInteressado(adocao.get(i).getDataInteressado());
             dl.setCodigo(adocao.get(i).getCodigo());
             dl.setAnimal(adocao.get(i).getAnimal().getNome());
-            dl.setUsuarioAnunciador(adocao.get(i).getUsuarioAnunciador().getNome());
+            dl.setAnunciador(adocao.get(i).getAnunciador().getNome());
             if(adocao.get(i).getInteressados() != null){
                 List<String> interessados = new ArrayList<String>();
                 for(int j = 0; j < adocao.get(i).getInteressados().size(); j++){
@@ -162,8 +162,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                 }
                 dl.setInteressados(interessados);
             }
-            if(adocao.get(i).getUsuarioEscolhido()!= null){
-                dl.setUsuarioEscolhido(adocao.get(i).getUsuarioEscolhido().getNome());
+            if(adocao.get(i).getAdotante()!= null){
+                dl.setAdotante(adocao.get(i).getAdotante().getNome());
             }
             listaAdocao.add(dl);
             }
@@ -172,8 +172,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
     }
 
     @Override
-    public List<ListarAdocao> buscarAdocaoPorUsuarioAnunciador(String nomeUsuario) {
-         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorUsuarioAnunciador(nomeUsuario);
+    public List<ListarAdocao> buscarAdocaoPorAnunciador(String nomeAnunciador){
+         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorAnunciador(nomeAnunciador);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){
@@ -183,7 +183,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
             dl.setDataInteressado(adocao.get(i).getDataInteressado());
             dl.setCodigo(adocao.get(i).getCodigo());
             dl.setAnimal(adocao.get(i).getAnimal().getNome());
-            dl.setUsuarioAnunciador(adocao.get(i).getUsuarioAnunciador().getNome());
+            dl.setAnunciador(adocao.get(i).getAnunciador().getNome());
             if(adocao.get(i).getInteressados() != null){
                 List<String> interessados = new ArrayList<String>();
                 for(int j = 0; j < adocao.get(i).getInteressados().size(); j++){
@@ -192,8 +192,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                 }
                 dl.setInteressados(interessados);
             }
-            if(adocao.get(i).getUsuarioEscolhido()!= null){
-                dl.setUsuarioEscolhido(adocao.get(i).getUsuarioEscolhido().getNome());
+            if(adocao.get(i).getAdotante()!= null){
+                dl.setAdotante(adocao.get(i).getAdotante().getNome());
             }
             listaAdocao.add(dl);
             }
@@ -202,8 +202,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
     }
 
     @Override
-    public List<ListarAdocao> buscarPorUsuarioEscolhido(String nomeUsuario) {
-         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorEscolhido(nomeUsuario);
+    public List<ListarAdocao> buscarAdocaoPorAdotante(String nomeAdotante) {
+         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorAdotante(nomeAdotante);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){
@@ -213,7 +213,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
             dl.setDataInteressado(adocao.get(i).getDataInteressado());
             dl.setCodigo(adocao.get(i).getCodigo());
             dl.setAnimal(adocao.get(i).getAnimal().getNome());
-            dl.setUsuarioAnunciador(adocao.get(i).getUsuarioAnunciador().getNome());
+            dl.setAnunciador(adocao.get(i).getAnunciador().getNome());
             if(adocao.get(i).getInteressados() != null){
                 List<String> interessados = new ArrayList<String>();
                 for(int j = 0; j < adocao.get(i).getInteressados().size(); j++){
@@ -222,8 +222,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                 }
                 dl.setInteressados(interessados);
             }
-            if(adocao.get(i).getUsuarioEscolhido()!= null){
-                dl.setUsuarioEscolhido(adocao.get(i).getUsuarioEscolhido().getNome());
+            if(adocao.get(i).getAdotante()!= null){
+                dl.setAdotante(adocao.get(i).getAdotante().getNome());
             }
             listaAdocao.add(dl);
             }
@@ -243,7 +243,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
             dl.setDataInteressado(adocao.get(i).getDataInteressado());
             dl.setCodigo(adocao.get(i).getCodigo());
             dl.setAnimal(adocao.get(i).getAnimal().getNome());
-            dl.setUsuarioAnunciador(adocao.get(i).getUsuarioAnunciador().getNome());
+            dl.setAnunciador(adocao.get(i).getAnunciador().getNome());
             if(adocao.get(i).getInteressados() != null){
                 List<String> interessados = new ArrayList<String>();
                 for(int j = 0; j < adocao.get(i).getInteressados().size(); j++){
@@ -252,8 +252,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                 }
                 dl.setInteressados(interessados);
             }
-            if(adocao.get(i).getUsuarioEscolhido()!= null){
-                dl.setUsuarioEscolhido(adocao.get(i).getUsuarioEscolhido().getNome());
+            if(adocao.get(i).getAdotante()!= null){
+                dl.setAdotante(adocao.get(i).getAdotante().getNome());
             }
             listaAdocao.add(dl);
             }
@@ -263,18 +263,18 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     @Transactional(rollbackFor = UsuarioInexistenteException.class)
-    public void interesseAdocao(String email, long codigo) throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoExistenteException {
+    public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException {
         Adocao adocao = new Adocao();
         Usuario usuario = new Usuario();
         List<Adocao> listaAdocao =  new ArrayList<Adocao>();
         List<Usuario> listaUsuario =  new ArrayList<Usuario>();
         
         adocao = repositorioAdocao.findOne(codigo);
-        if(adocao.getUsuarioEscolhido()!=null){
-           throw new AdocaoExistenteException();
+        if(adocao.getAdotante()!=null){
+           throw new AdocaoJaRealizadaException();
         } else{
             usuario = servicosUsuario.BuscarUsuarioPorEmail(email);
-            if(usuario.getEmail().equals(adocao.getUsuarioAnunciador().getEmail())){
+            if(usuario.getEmail().equals(adocao.getAnunciador().getEmail())){
                 throw new ProprioUsuarioAnunciadorException();
             }
             else{
@@ -294,10 +294,10 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     @Transactional(rollbackFor = UsuarioInexistenteException.class)
-    public void realizarAdocao() throws UsuarioInexistenteException {
+    public void escolherAdotante() throws UsuarioInexistenteException{
         List<Adocao> listaAdocao = (List<Adocao>) repositorioAdocao.findAll();
         for(int i= 0; i< listaAdocao.size(); i++){ 
-            if(listaAdocao.get(i).getDataInteressado()!=null && listaAdocao.get(i).getUsuarioEscolhido()==null){
+            if(listaAdocao.get(i).getDataInteressado()!=null && listaAdocao.get(i).getAdotante()==null){
                 Usuario usuarioGanhador = new Usuario();
                 List<Usuario> listaUsuarioInteressado = listaAdocao.get(i).getInteressados();
                
