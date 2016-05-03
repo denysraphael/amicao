@@ -78,11 +78,11 @@ public class WSControllerUsuario {
     
     @RequestMapping("/cadastro")
     public String formCadastrar() {
-        return "UsuarioCadastrar";
+        return "CadastrarUsuario";
     }
     
     @RequestMapping("/atualiza")
     public String formAtualizar() {
-        return "UsuarioAtualizar";
+        return "AtualizarUsuario";
     }
 }
