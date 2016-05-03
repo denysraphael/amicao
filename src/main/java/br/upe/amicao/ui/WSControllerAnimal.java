@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author -Denys
  */
 @Controller
-@RequestMapping("/amicao/animal")
+@RequestMapping("/animal")
 public class WSControllerAnimal {
     static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(WSControllerAnimal.class);
     @Autowired

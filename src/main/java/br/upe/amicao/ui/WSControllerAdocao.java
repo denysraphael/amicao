@@ -6,12 +6,9 @@
 package br.upe.amicao.ui;
 
 import br.upe.amicao.entidades.Adocao;
-import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
 import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
-import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import br.upe.amicao.listar.ListarAdocao;
 import br.upe.amicao.negocios.ServicosFachada;
@@ -31,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author -Denys
  */
 @Controller
-@RequestMapping("/amicao/adocao")
+@RequestMapping("adocao")
 public class WSControllerAdocao {
     
     static Logger log = Logger.getLogger(WSControllerAdocao.class);

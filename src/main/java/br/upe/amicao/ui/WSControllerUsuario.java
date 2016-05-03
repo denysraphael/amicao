@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
  * @author -Denys
  */
 @RestController
-@RequestMapping("/amicao/usuario")
+@RequestMapping("/usuario")
 public class WSControllerUsuario {
     static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(WSControllerUsuario.class);
     @Autowired

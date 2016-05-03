@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author -Denys
  */
 @Controller
-@RequestMapping("/amicao/raca")
+@RequestMapping("/raca")
 public class WSControllerRaca {
     static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(WSControllerRaca.class);
     @Autowired
