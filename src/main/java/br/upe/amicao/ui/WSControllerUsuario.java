@@ -75,4 +75,14 @@ public class WSControllerUsuario {
             return new ResponseEntity<UsuarioInexistenteException>(ex, HttpStatus.BAD_REQUEST);
         }
     }
+    
+    @RequestMapping("/cadastro")
+    public String formCadastrar() {
+        return "UsuarioCadastrar";
+    }
+    
+    @RequestMapping("/atualiza")
+    public String formAtualizar() {
+        return "UsuarioAtualizar";
+    }
 }

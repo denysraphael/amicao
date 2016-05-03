@@ -131,8 +131,8 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public void escolherAdotante() throws UsuarioInexistenteException {
-        servicoAdocao.escolherAdotante();
+    public void escolherAdotante(Long codigo, String nomeAdotante) throws UsuarioInexistenteException {
+        servicoAdocao.escolherAdotante(codigo, nomeAdotante);
     }
 
     @Override

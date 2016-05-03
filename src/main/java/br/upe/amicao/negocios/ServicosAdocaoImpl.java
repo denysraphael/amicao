@@ -233,7 +233,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     public List<ListarAdocao> buscarPorData(Date data) {
-         List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorDataAnuncio(data);
+        List<Adocao> adocao = (List<Adocao>) repositorioAdocao.buscarPorDataAnuncio(data);
         List<ListarAdocao> listaAdocao = new ArrayList<ListarAdocao>();
         
         for(int i = 0; i < adocao.size(); i++){
@@ -294,14 +294,14 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
 
     @Override
     @Transactional(rollbackFor = UsuarioInexistenteException.class)
-    public void escolherAdotante() throws UsuarioInexistenteException{
-        List<Adocao> listaAdocao = (List<Adocao>) repositorioAdocao.findAll();
-        for(int i= 0; i< listaAdocao.size(); i++){ 
-            if(listaAdocao.get(i).getDataInteressado()!=null && listaAdocao.get(i).getAdotante()==null){
-                Usuario usuarioGanhador = new Usuario();
-                List<Usuario> listaUsuarioInteressado = listaAdocao.get(i).getInteressados();
+    public void escolherAdotante(Long codigo, String nomeAdotante) throws UsuarioInexistenteException{
+        Adocao adocao = repositorioAdocao.findOne(codigo);
+        Usuario usuario = new Usuario();
+        if(adocao.getAdotante()==null){
+            List<Usuario> listaUsuarioInteressado = adocao.getInteressados();
+            for(int j = 1; j < listaUsuarioInteressado.size(); j++){
                
-            }
+           }
         }
     }
 

@@ -52,7 +52,7 @@ public interface ServicosFachada extends Serializable{
     public List<ListarAdocao> buscarPorData(Date data);
     public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException;
     public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException;
-    public void escolherAdotante() throws UsuarioInexistenteException;
+    public void escolherAdotante(Long codigo, String nomeAdotante) throws UsuarioInexistenteException;
     
     //Animal
     public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome)throws ClassificacaoInexistenteException, RacaInexistenteException;
