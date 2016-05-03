@@ -76,8 +76,8 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public void cadastrarAdocao(Adocao adocao, Animal animal, String email, String nomeClassificacao, String nomeRaca) throws UsuarioInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException {
-        servicoAdocao.cadastrarAdocao(adocao, animal, email, nomeClassificacao, nomeRaca);
+    public void cadastrarAdocao(Adocao adocao, Long codigoAnimal, String email) throws UsuarioInexistenteException {
+        servicoAdocao.cadastrarAdocao(adocao, codigoAnimal, email);
     }
 
     @Override

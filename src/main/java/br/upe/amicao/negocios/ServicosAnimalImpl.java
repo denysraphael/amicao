@@ -9,7 +9,8 @@ import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.entidades.Animal;
-import br.upe.amicao.exceptions.UsuarioInexistenteException;
+import br.upe.amicao.entidades.Classificacao;
+import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.persistencia.RepositorioAnimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,23 +35,43 @@ public class ServicosAnimalImpl implements ServicosAnimal {
     @Override
     @Transactional(rollbackFor = ClassificacaoInexistenteException.class)
     public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome) throws ClassificacaoInexistenteException, RacaInexistenteException {
-        animal.setClassificacao(servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome));
-        animal.setRaca(servicosRaca.buscarRacaPorNome(racaNome));
-        Animal a = repositorioAnimal.save(animal);
-        animal.setCodigo(a.getCodigo());
+        Classificacao classificacao = servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome);
+        Raca raca = servicosRaca.buscarRacaPorNome(racaNome);
+        if(servicosClassificacao.buscarClassificacaoPorNome(classificacao.getNome())==null){
+            throw new ClassificacaoInexistenteException();
+        }
+        if (raca == null){
+            throw new RacaInexistenteException();
+        }
+        else{
+            animal.setClassificacao(classificacao);
+            animal.setRaca(raca);
+            Animal a = repositorioAnimal.save(animal);
+            animal.setCodigo(a.getCodigo());
+        }
     }
 
     @Override
-    @Transactional(rollbackFor = AnimalInexistenteException.class)
+    @Transactional(rollbackFor = {AnimalInexistenteException.class})
     public void atualizarAnimal(Animal animal, Long codigoAtualizado, String classificacaoNome, String racaNome) throws AnimalInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException {
         Animal animalAtualizar = repositorioAnimal.findOne(animal.getCodigo());
+        Classificacao classificacao = servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome);
+        Raca raca = servicosRaca.buscarRacaPorNome(racaNome);
         if(animalAtualizar==null){
             throw new AnimalInexistenteException();
         }
-        animal.setClassificacao(servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome));
-        animal.setRaca(servicosRaca.buscarRacaPorNome(racaNome));
-        animal.setCodigo(animalAtualizar.getCodigo());
-        repositorioAnimal.save(animal);
+        if(classificacao == null){
+            throw new ClassificacaoInexistenteException();
+        }
+        if (raca == null){
+            throw new RacaInexistenteException();
+        }
+        else{
+            animal.setClassificacao(classificacao);
+            animal.setRaca(raca);
+            animal.setCodigo(animalAtualizar.getCodigo());
+            repositorioAnimal.save(animal);
+        }
     }
 
     @Override

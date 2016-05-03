@@ -39,16 +39,12 @@ public class WSControllerAdocao {
     private ServicosFachada fachada;
     
     @RequestMapping(value="/cadastrar",produces=MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<?> cadastrarAdocao(Adocao adocao,Animal animal,String emailUsuario,String nomeClassificacao, String nomeRaca) {
+    public @ResponseBody ResponseEntity<?> cadastrarAdocao(Adocao adocao, Long codigoAnimal,String emailUsuario,String nomeClassificacao, String nomeRaca) {
         try {
-            fachada.cadastrarAdocao(adocao, animal, nomeRaca, nomeClassificacao, nomeRaca);
+            fachada.cadastrarAdocao(adocao, codigoAnimal, nomeRaca);
             return new ResponseEntity<String>(HttpStatus.OK);
         } catch (UsuarioInexistenteException e) {
             return new ResponseEntity<UsuarioInexistenteException>(e,HttpStatus.BAD_REQUEST);
-        } catch (ClassificacaoInexistenteException ex) {
-            return new ResponseEntity<ClassificacaoInexistenteException>(ex,HttpStatus.BAD_REQUEST);
-        } catch (RacaInexistenteException ex) {
-            return new ResponseEntity<RacaInexistenteException>(ex,HttpStatus.BAD_REQUEST);
         }
     }
     

@@ -7,13 +7,10 @@ package br.upe.amicao.negocios;
 
 import br.upe.amicao.listar.ListarAdocao;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
-import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
 import br.upe.amicao.entidades.Adocao;
-import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import br.upe.amicao.persistencia.RepositorioAdocao;
@@ -44,23 +41,20 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
     
     @Override
     @Transactional(rollbackFor = UsuarioInexistenteException.class)
-    public void cadastrarAdocao(Adocao adocao, Animal animal, String email, String nomeClassificacao, String nomeRaca) throws UsuarioInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException {
+    public void cadastrarAdocao(Adocao adocao, Long codigoAnimal, String email) throws UsuarioInexistenteException {
         Usuario usuario = servicosUsuario.BuscarUsuarioPorEmail(email);
         List<Adocao> listaAdocao = usuario.getAdocoesAnunciadas();
         try {    
             adocao.setAtivo(true);
             adocao.setAnunciador(usuario); 
-            servicosAnimal.cadastrarAnimal(animal, nomeClassificacao, nomeRaca);          
-            adocao.setAnimal(servicosAnimal.consultarAnimalPorCodigo(animal.getCodigo()));
+            adocao.setAnimal(servicosAnimal.consultarAnimalPorCodigo(codigoAnimal));
             repositorioAdocao.save(adocao);                                             
             listaAdocao.add(adocao);
             usuario.setAdocoesAnunciadas(listaAdocao);
-            servicosUsuario.atualizarUsuario(usuario, email); 
-        } catch (UsuarioInexistenteException | ClassificacaoInexistenteException | RacaInexistenteException e) {
-            throw e;
+            servicosUsuario.atualizarUsuario(usuario, email);  
         } catch (AnimalInexistenteException ex) {
-            Logger.getLogger(AnimalInexistenteException.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            Logger.getLogger(ServicosAdocaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
