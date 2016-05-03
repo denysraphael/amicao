@@ -59,7 +59,7 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
         } catch (UsuarioInexistenteException | ClassificacaoInexistenteException | RacaInexistenteException e) {
             throw e;
         } catch (AnimalInexistenteException ex) {
-            Logger.getLogger(ServicosAdocaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AnimalInexistenteException.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 

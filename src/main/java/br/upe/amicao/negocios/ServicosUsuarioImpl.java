@@ -25,7 +25,7 @@ public class ServicosUsuarioImpl implements ServicosUsuario{
 
     @Autowired
     private RepositorioUsuario repositorioUsuario;
-    @Transactional(rollbackFor = UsuarioExistenteException.class)
+    @Transactional(rollbackFor = {UsuarioExistenteException.class})
     public void cadastrarUsuario(Usuario usuario) throws UsuarioExistenteException, UsuarioInexistenteException {
         Usuario us = repositorioUsuario.findByEmail(usuario.getEmail());
         if(us!=null){
