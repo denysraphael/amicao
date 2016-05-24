@@ -15,10 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author -Denys
- */
 @Entity
 public class Classificacao implements Serializable{
     private Long codigo;

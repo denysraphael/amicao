@@ -5,6 +5,6 @@
  */
 package br.upe.amicao.exceptions;
 
-public class UsuarioExistenteException extends Exception {
+public class UsuarioNaoInteressadoExceptions extends Exception{
     
 }

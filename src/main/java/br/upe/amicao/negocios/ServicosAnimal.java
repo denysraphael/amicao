@@ -12,10 +12,6 @@ import br.upe.amicao.entidades.Animal;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author -Denys
- */
 public interface ServicosAnimal extends Serializable {
     public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome)throws ClassificacaoInexistenteException, RacaInexistenteException;
     public void atualizarAnimal(Animal animal, Long codigoAtualizado, String classificacaoNome, String racaNome) throws AnimalInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException;

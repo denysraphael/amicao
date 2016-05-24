@@ -22,14 +22,11 @@ import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
+import br.upe.amicao.exceptions.UsuarioNaoInteressadoExceptions;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author -Denys
- */
 public interface ServicosFachada extends Serializable{
     
     //Usuario
@@ -52,7 +49,7 @@ public interface ServicosFachada extends Serializable{
     public List<ListarAdocao> buscarPorData(Date data);
     public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException;
     public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException;
-    public void escolherAdotante(Long codigo, String nomeAdotante) throws UsuarioInexistenteException;
+    public void escolherAdotante(Long codigo, String nomeAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions;    
     
     //Animal
     public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome)throws ClassificacaoInexistenteException, RacaInexistenteException;

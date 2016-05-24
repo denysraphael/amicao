@@ -9,10 +9,6 @@ import br.upe.amicao.entidades.Adocao;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author -Denys
- */
 public class ListarAdocao {
     
     private Long codigo;

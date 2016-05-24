@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- *
- * @author -Denys
- */
 @Controller
 @RequestMapping("/raca")
 public class WSControllerRaca {
@@ -31,12 +27,12 @@ public class WSControllerRaca {
     @Autowired
     private ServicosFachada fachada;
     
-    @RequestMapping(value = "/listar", headers="Accept=*/*", method = RequestMethod.GET)
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public @ResponseBody List<Raca> listarRaca(){
         return fachada.listarRaca();
     }
     
-    @RequestMapping(value = "/cadastrar", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/cadastrar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> adicionarRaca(Raca raca, String classificacaoNome) {
         try{
             fachada.cadastrarRaca(raca, classificacaoNome);
@@ -57,7 +53,7 @@ public class WSControllerRaca {
         }
     }
     
-    @RequestMapping(value = "/atualizar", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/atualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> atualizarRaca(String nomeAtual, String nomeAtualizar, String classificacaoNome) {
         Raca raca;
         try {

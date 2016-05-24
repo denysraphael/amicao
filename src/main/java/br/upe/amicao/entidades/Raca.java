@@ -14,12 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-/**
- *
- * @author -Denys
- */
 @Entity
 public class Raca implements Serializable {
     private Long codigo;

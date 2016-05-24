@@ -7,10 +7,6 @@ package br.upe.amicao.listar;
 
 import java.util.List;
 
-/**
- *
- * @author -Denys
- */
 public class ListarUsuario {
     private Long codigo;
     private String email;

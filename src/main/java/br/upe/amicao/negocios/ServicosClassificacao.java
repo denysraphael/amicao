@@ -11,10 +11,6 @@ import br.upe.amicao.entidades.Classificacao;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author -Denys
- */
 public interface ServicosClassificacao extends Serializable{
     public void cadastrarClassificacao(Classificacao classificacao) throws ClassificacaoExistenteException;
     public void atualizarClassificacao(String nomeAtual, String nomeAtualizar) throws ClassificacaoInexistenteException;

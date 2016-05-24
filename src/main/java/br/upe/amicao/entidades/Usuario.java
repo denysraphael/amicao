@@ -16,10 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-/**
- *
- * @author -Denys
- */
+
+
 @Entity
 public class Usuario implements Serializable {
 

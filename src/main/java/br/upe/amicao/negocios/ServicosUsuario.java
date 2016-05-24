@@ -12,10 +12,6 @@ import br.upe.amicao.entidades.Usuario;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author -Denys
- */
 public interface ServicosUsuario extends Serializable{
     
     public void cadastrarUsuario(Usuario usuario) throws UsuarioExistenteException, UsuarioInexistenteException;

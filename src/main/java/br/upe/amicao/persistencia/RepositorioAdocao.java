@@ -13,10 +13,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-/**
- *
- * @author -Denys
- */
 public interface RepositorioAdocao extends CrudRepository<Adocao, Long>{
     
     @Query("select new br.upe.amicao.listar.ListarAdocao(a) from Adocao a where a.animal.nome=:nomeAnimal")

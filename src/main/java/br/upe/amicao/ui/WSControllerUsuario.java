@@ -19,10 +19,7 @@ import br.upe.amicao.listar.ListarUsuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-/**
- *
- * @author -Denys
- */
+
 @RestController
 @RequestMapping("/usuario")
 public class WSControllerUsuario {
@@ -30,12 +27,12 @@ public class WSControllerUsuario {
     @Autowired
     private ServicosFachada fachada;
     
-    @RequestMapping(value = "/listar", headers="Accept=*/*", method = RequestMethod.GET)
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public @ResponseBody List<ListarUsuario> listarUsuario(){
         return fachada.listarUsuario();
     }
     
-    @RequestMapping(value = "/consultar")
+    @RequestMapping(value = "/buscar")
     public @ResponseBody List<ListarUsuario> buscar(String nome){
         try{
             return fachada.BuscarUsuarioPorNome(nome);
@@ -44,7 +41,7 @@ public class WSControllerUsuario {
         }
     }
     
-    @RequestMapping(value = "/cadastrar", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/cadastrar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> adicionarUsuario(Usuario usuario) {
         try {
             fachada.cadastrarUsuario(usuario);
@@ -56,7 +53,7 @@ public class WSControllerUsuario {
         }
     }
   
-    @RequestMapping(value = "/atualizar", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/atualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> atualizarUsuario(Usuario usuario, String emailAtualizar) {
         try {
             fachada.atualizarUsuario(usuario, emailAtualizar);
@@ -66,7 +63,7 @@ public class WSControllerUsuario {
         }
     }
     
-    @RequestMapping(value = "/excluir", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/excluir", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> excluirUsuario(String email) {
         try {
             fachada.excluirUsuario(email);
@@ -78,7 +75,7 @@ public class WSControllerUsuario {
     
     @RequestMapping("/cadastro")
     public String formCadastrar() {
-        return "CadastrarUsuario";
+        return "cadastroUsuario";
     }
     
     @RequestMapping("/atualiza")

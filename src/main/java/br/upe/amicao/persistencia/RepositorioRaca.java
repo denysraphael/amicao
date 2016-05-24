@@ -11,10 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author -Denys
- */
 @Repository
 public interface RepositorioRaca extends CrudRepository<Raca, Long>{
     public Raca findByNome(String nome);

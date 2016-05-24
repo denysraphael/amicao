@@ -20,10 +20,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author -Denys
- */
 @Entity
 public class Adocao implements Serializable{
     

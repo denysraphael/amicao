@@ -11,15 +11,12 @@ import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
+import br.upe.amicao.exceptions.UsuarioNaoInteressadoExceptions;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
-/**
- *
- * @author -Denys
- */
 public interface ServicosAdocao extends Serializable {
     public void cadastrarAdocao(Adocao adocao, Long codigoAnimal, String email) throws UsuarioInexistenteException;
     public void excluirAdocao(Long codigo) throws AdocaoInexistenteException;
@@ -32,5 +29,5 @@ public interface ServicosAdocao extends Serializable {
     public List<ListarAdocao> buscarPorData(Date data);
     public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException;
     public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException;
-    public void escolherAdotante(Long codigo, String nomeAdotante) throws UsuarioInexistenteException;
+    public void escolherAdotante(Long codigo, String nomeAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions;
 }

@@ -17,10 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author -Denys
- */
 @Entity
 public class Animal implements Serializable {
     private Long codigo;

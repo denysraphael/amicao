@@ -6,14 +6,9 @@
 package br.upe.amicao.persistencia;
 
 import br.upe.amicao.entidades.Classificacao;
-import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author -Denys
- */
 @Repository
 public interface RepositorioClassificacao extends CrudRepository<Classificacao, Long> {
     public Classificacao findByNome(String nome);

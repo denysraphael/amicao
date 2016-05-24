@@ -5,10 +5,6 @@
  */
 package br.upe.amicao.exceptions;
 
-/**
- *
- * @author -Denys
- */
 public class AdocaoInexistenteException extends Exception {
     
 }

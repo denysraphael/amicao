@@ -12,10 +12,6 @@ import br.upe.amicao.entidades.Raca;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author -Denys
- */
 public interface ServicosRaca extends Serializable{
     public void cadastrarRaca(Raca raca, String classificacaoNome) throws RacaExistenteException, ClassificacaoInexistenteException;
     public void atualizarRaca(String nomeAtual, String nomeAtualizar, String classificacaoNome) throws RacaInexistenteException, ClassificacaoInexistenteException;

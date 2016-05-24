@@ -22,15 +22,14 @@ import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
+import br.upe.amicao.exceptions.UsuarioNaoInteressadoExceptions;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author -Denys
- */
 @Service
 public class ServicosFachadaImpl implements ServicosFachada{
 
@@ -131,8 +130,8 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public void escolherAdotante(Long codigo, String nomeAdotante) throws UsuarioInexistenteException {
-        servicoAdocao.escolherAdotante(codigo, nomeAdotante);
+    public void escolherAdotante(Long codigo, String nomeAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions{     
+       servicoAdocao.escolherAdotante(codigo, nomeAdotante);
     }
 
     @Override

@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- *
- * @author -Denys
- */
 @Controller
 @RequestMapping("/animal")
 public class WSControllerAnimal {
@@ -31,7 +27,7 @@ public class WSControllerAnimal {
     @Autowired
     private ServicosFachada fachada;
     
-    @RequestMapping(value = "/listar", headers="Accept=*/*", method = RequestMethod.GET)
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public @ResponseBody List<Animal> listarAnimal(){
         return fachada.listarAnimal();
     }
@@ -48,7 +44,7 @@ public class WSControllerAnimal {
     }
     
     
-    @RequestMapping(value = "/cadastrar", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/cadastrar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> cadastrarAnimal(Animal animal, String nomeClassificacao, String nomeRaca) {
         try {
             fachada.cadastrarAnimal(animal, nomeClassificacao, nomeRaca);
@@ -60,7 +56,7 @@ public class WSControllerAnimal {
         }
     }
     
-    @RequestMapping(value = "/atualizar", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/atualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> atualizarAnimal(Animal animal, Long codigoAtualizado, String nomeClassificacao, String nomeRaca) {
         try{
             fachada.atualizarAnimal(animal, codigoAtualizado, nomeClassificacao, nomeRaca);
@@ -74,7 +70,7 @@ public class WSControllerAnimal {
         }
     }
     
-    @RequestMapping(value = "/excluir", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/excluir", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> excluirAnimal(Long codigo) {
         try{
             fachada.deletarAnimal(codigo);

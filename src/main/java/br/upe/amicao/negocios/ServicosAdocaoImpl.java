@@ -13,6 +13,7 @@ import br.upe.amicao.exceptions.AdocaoInexistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
+import br.upe.amicao.exceptions.UsuarioNaoInteressadoExceptions;
 import br.upe.amicao.persistencia.RepositorioAdocao;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,10 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author -Denys
- */
 @Service
 public class ServicosAdocaoImpl implements ServicosAdocao{
 
@@ -278,25 +275,45 @@ public class ServicosAdocaoImpl implements ServicosAdocao{
                 listaUsuario.add(usuario);
                 adocao.setInteressados(listaUsuario);
                 servicosUsuario.atualizarUsuario(usuario, email);
-                if(adocao.getDataInteressado()==null){
-                    adocao.setDataInteressado(new Date());
-                }
                 repositorioAdocao.save(adocao);
             }
         }
     }
 
     @Override
-    @Transactional(rollbackFor = UsuarioInexistenteException.class)
-    public void escolherAdotante(Long codigo, String nomeAdotante) throws UsuarioInexistenteException{
+    @Transactional(rollbackFor = UsuarioNaoInteressadoExceptions.class)
+    public void escolherAdotante(Long codigo, String emailAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions{
         Adocao adocao = repositorioAdocao.findOne(codigo);
-        Usuario usuario = new Usuario();
-        if(adocao.getAdotante()==null){
-            List<Usuario> listaUsuarioInteressado = adocao.getInteressados();
-            for(int j = 1; j < listaUsuarioInteressado.size(); j++){
-               
-           }
+        if(adocao==null){
+           throw new AdocaoInexistenteException();
         }
+        else{
+            if(adocao.getAdotante()==null){
+                Usuario usuarioEscolhido = new Usuario();
+                List<Usuario> listaUsuarioInteressado = adocao.getInteressados();
+                if(listaUsuarioInteressado.contains(emailAdotante)==false){
+                  throw new UsuarioNaoInteressadoExceptions();    
+                }
+                else{
+                    for(int i = 0; i < listaUsuarioInteressado.size(); i++){
+                        if(listaUsuarioInteressado.get(i).getEmail()==emailAdotante){
+                            usuarioEscolhido = listaUsuarioInteressado.get(0);
+                        }
+                        
+                    }
+                }
+                List<Adocao> adocoesRealizadas = usuarioEscolhido.getAdocoesRealizadas();
+                adocoesRealizadas.add(adocao);
+                usuarioEscolhido.setAdocoesRealizadas(adocoesRealizadas);
+                try {
+                    servicosUsuario.atualizarUsuario(usuarioEscolhido, usuarioEscolhido.getEmail());
+                } catch (UsuarioInexistenteException ex) {
+                    Logger.getLogger(ServicosAdocaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                adocao.setAdotante(usuarioEscolhido);
+                repositorioAdocao.save(adocao);
+            }
+        }   
     }
 
     @Override
