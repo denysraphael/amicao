@@ -6,7 +6,6 @@
 package br.upe.amicao.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

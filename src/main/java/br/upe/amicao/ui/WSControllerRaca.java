@@ -67,4 +67,9 @@ public class WSControllerRaca {
             return new ResponseEntity<RacaInexistenteException>(ex, HttpStatus.BAD_REQUEST);
         }
     }
+    
+    @RequestMapping("/cadastro")
+    public String formCadastrar() {
+        return "cadastroRaca";
+    }
 }

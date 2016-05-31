@@ -62,4 +62,9 @@ public class WSControllerClassificacao {
             return new ResponseEntity<ClassificacaoInexistenteException>(ex, HttpStatus.BAD_REQUEST);
         }
     }
+    
+    @RequestMapping("/cadastro")
+    public String formCadastrar() {
+        return "cadastroClassificacao";
+    }
 }

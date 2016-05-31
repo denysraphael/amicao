@@ -80,4 +80,10 @@ public class WSControllerAnimal {
         } 
     }
     
+     
+    @RequestMapping("/cadastro")
+    public String formCadastrar() {
+        return "cadastroAnimal";
+    }
+    
 }

@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import br.upe.amicao.listar.ListarUsuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 
-@RestController
+@Controller
 @RequestMapping("/usuario")
 public class WSControllerUsuario {
     static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(WSControllerUsuario.class);
@@ -42,7 +42,7 @@ public class WSControllerUsuario {
     }
     
     @RequestMapping(value = "/cadastrar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<?> adicionarUsuario(Usuario usuario) {
+    public @ResponseBody ResponseEntity<?> cadastrarUsuario(Usuario usuario) {
         try {
             fachada.cadastrarUsuario(usuario);
             return new ResponseEntity<String>(HttpStatus.OK);
@@ -80,6 +80,17 @@ public class WSControllerUsuario {
     
     @RequestMapping("/atualiza")
     public String formAtualizar() {
-        return "AtualizarUsuario";
+        return "atualizaUsuario";
     }
+    
+    @RequestMapping("/exclui")
+    public String formExcluir() {
+        return "excluiUsuario";
+    }
+    
+    @RequestMapping("/busca")
+    public String formBuscar() {
+        return "buscaUsuarioPorNome";
+    }
+    
 }

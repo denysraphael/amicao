@@ -5,6 +5,7 @@
  */
 package br.upe.amicao.negocios;
 
+import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.RacaExistenteException;
 import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
@@ -30,7 +31,9 @@ public class ServicosRacaImpl implements ServicosRaca{
             throw new RacaExistenteException();
         }
         else{
-            raca.setClassificacao(servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome));
+            Classificacao classificacao = servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome);
+            classificacao.setCodigo(classificacao.getCodigo());
+            raca.setClassificacao(classificacao);
             repositorioRaca.save(raca);
         }
     }

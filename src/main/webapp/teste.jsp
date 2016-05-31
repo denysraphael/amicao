@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>TESTE!</h1>
+        <h1>Amicão!</h1>
     </body>
 </html>
