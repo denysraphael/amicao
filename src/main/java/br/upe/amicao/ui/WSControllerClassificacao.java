@@ -52,10 +52,8 @@ public class WSControllerClassificacao {
     
     @RequestMapping(value = "/atualizar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> atualizarClassificacao(String nomeAtual, String nomeAtualizar) {
-        Classificacao classificacao;
+        //Classificacao classificacao;
         try {
-            classificacao = fachada.buscarClassificacaoPorNome(nomeAtual);
-            classificacao.setNome(nomeAtualizar);
             fachada.atualizarClassificacao(nomeAtual,nomeAtualizar);
             return new ResponseEntity<String>(HttpStatus.OK);
         } catch (ClassificacaoInexistenteException ex) {
