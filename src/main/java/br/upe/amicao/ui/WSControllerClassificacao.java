@@ -67,4 +67,9 @@ public class WSControllerClassificacao {
     public String formCadastrar() {
         return "cadastroClassificacao";
     }
+    
+    @RequestMapping("/atualiza")
+    public String formAtualizar() {
+        return "atualizaClassificacao";
+    }
 }

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : buscarUsuarioPorNome
-    Created on : 03/05/2016, 10:28:42
+    Document   : atualizaClassificacao
+    Created on : 04/06/2016, 17:04:15
     Author     : -Denys
 --%>
 
@@ -12,9 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="buscar" method="POST">
-            <h1>Buscar Usuario</h1>
-            <div>Nome: <input type="text" name="nome"></div>
+       <form action="atualizar" method="POST">
+            <h1>Atualizar Usuario</h1>
+            <div>Nome Atual: <input type="text" name="nomeAtual"></div>
+            <div>Novo Nome: <input type="text" name="nomeAtualizar"></div>
             <div><input type="submit" value="Enviar"></div>
         </form>
     </body>
