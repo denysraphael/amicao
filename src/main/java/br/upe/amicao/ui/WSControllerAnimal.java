@@ -86,4 +86,16 @@ public class WSControllerAnimal {
         return "cadastroAnimal";
     }
     
+    @RequestMapping("/atualiza")
+    public String formAtualizar() {
+        return "atualizaAnimal";
+    }
+    
+    @RequestMapping("/exclui")
+    public String formExcluir() {
+        return "excluirAnimal";
+    }
+    
+ 
+    
 }

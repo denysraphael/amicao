@@ -70,4 +70,10 @@ public class WSControllerClassificacao {
     public String formAtualizar() {
         return "atualizaClassificacao";
     }
+    
+    @RequestMapping("/busca")
+    public String formBuscar() {
+        return "buscaClassificacao";
+    }
+    
 }

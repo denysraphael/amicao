@@ -13,7 +13,7 @@
     </head>
     <body>
         <form action="atualizar" method="POST">
-            <h1>Atualizar Usuario</h1>
+            <h1>Atualizar Usuario:</h1>
             <div>Email: <input type="email" name="email"></div>
             <div>Nome: <input type="text" name="nome"></div>
             <div>Telefone: <input type="text" name="telefone"></div>

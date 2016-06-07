@@ -72,4 +72,16 @@ public class WSControllerRaca {
     public String formCadastrar() {
         return "cadastroRaca";
     }
+    
+    @RequestMapping("/atualiza")
+    public String formAtualizar() {
+        return "atualizaRaca";
+    }
+    
+    @RequestMapping("/busca")
+    public String formBusca() {
+        return "buscaRaca";
+    }
+    
+    
 }

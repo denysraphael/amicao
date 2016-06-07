@@ -1,6 +1,6 @@
 <%-- 
-    Document   : buscarUsuarioPorNome
-    Created on : 03/05/2016, 10:28:42
+    Document   : ExcluirAnimal
+    Created on : 07/06/2016, 15:11:22
     Author     : -Denys
 --%>
 
@@ -12,9 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="buscar" method="POST">
-            <h1>Buscar Usuario</h1>
-            <div>Nome: <input type="text" name="nome"></div>
+        <form action="excluir" method="POST">
+            <h1>Excluir Animal</h1>
+            <div>Codigo: <input type="codigo" name="codigo"></div>
             <div><input type="submit" value="Enviar"></div>
         </form>
     </body>

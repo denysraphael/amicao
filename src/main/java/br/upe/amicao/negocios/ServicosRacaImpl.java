@@ -31,9 +31,7 @@ public class ServicosRacaImpl implements ServicosRaca{
             throw new RacaExistenteException();
         }
         else{
-            Classificacao classificacao = servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome);
-            classificacao.setCodigo(classificacao.getCodigo());
-            raca.setClassificacao(classificacao);
+            raca.setClassificacao(servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome));
             repositorioRaca.save(raca);
         }
     }

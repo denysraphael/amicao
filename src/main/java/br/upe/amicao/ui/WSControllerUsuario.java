@@ -33,8 +33,8 @@ public class WSControllerUsuario {
     }
     
     @RequestMapping(value = "/buscar")
-    public @ResponseBody List<ListarUsuario> buscar(String nome){
-        try{
+    public @ResponseBody List<ListarUsuario> buscarUsuario(String nome) {
+        try {
             return fachada.BuscarUsuarioPorNome(nome);
         } catch (UsuarioInexistenteException ex) {
             return null;
@@ -90,7 +90,7 @@ public class WSControllerUsuario {
     
     @RequestMapping("/busca")
     public String formBuscar() {
-        return "buscaUsuarioPorNome";
+        return "buscaUsuario";
     }
     
 }

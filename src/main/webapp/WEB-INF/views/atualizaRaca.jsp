@@ -1,6 +1,6 @@
 <%-- 
-    Document   : atualizaClassificacao
-    Created on : 04/06/2016, 17:04:15
+    Document   : atualizaRaca
+    Created on : 07/06/2016, 14:54:00
     Author     : -Denys
 --%>
 
@@ -13,9 +13,10 @@
     </head>
     <body>
         <form action="atualizar" method="POST">
-            <h1>Atualizar Classificacao:</h1>
+            <h1>Atualizar Raca:</h1>
             <div>Nome Atual: <input type="text" name="nomeAtual"></div>
             <div>Novo Nome: <input type="text" name="nomeAtualizar"></div>
+            <div>Classificacao: <input type="text" name="classificacaoNome"></div>
             <div><input type="submit" value="Enviar"></div>
         </form>
     </body>

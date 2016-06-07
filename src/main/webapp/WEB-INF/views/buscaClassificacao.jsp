@@ -1,6 +1,6 @@
 <%-- 
-    Document   : atualizaClassificacao
-    Created on : 04/06/2016, 17:04:15
+    Document   : buscaClassificacao
+    Created on : 06/06/2016, 20:11:17
     Author     : -Denys
 --%>
 
@@ -12,10 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="atualizar" method="POST">
-            <h1>Atualizar Classificacao:</h1>
-            <div>Nome Atual: <input type="text" name="nomeAtual"></div>
-            <div>Novo Nome: <input type="text" name="nomeAtualizar"></div>
+        <form action="buscar" method="POST">
+            <h1>Buscar Classificacao:</h1>
+            <div>Nome: <input type="text" name="nome"></div>
             <div><input type="submit" value="Enviar"></div>
         </form>
     </body>
