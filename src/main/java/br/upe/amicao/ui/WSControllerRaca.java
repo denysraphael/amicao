@@ -33,7 +33,7 @@ public class WSControllerRaca {
     }
     
     @RequestMapping(value = "/cadastrar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<?> adicionarRaca(Raca raca, String classificacaoNome) {
+    public @ResponseBody ResponseEntity<?> cadastrarRaca(Raca raca, String classificacaoNome) {
         try{
             fachada.cadastrarRaca(raca, classificacaoNome);
             return new ResponseEntity<String>(HttpStatus.OK);

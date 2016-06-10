@@ -25,8 +25,6 @@ import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import br.upe.amicao.exceptions.UsuarioNaoInteressadoExceptions;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

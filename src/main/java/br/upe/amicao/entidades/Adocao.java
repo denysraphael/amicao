@@ -29,14 +29,14 @@ public class Adocao implements Serializable{
     private Usuario adotante;
     private List<Usuario> interessados;
     private Date dataAnuncio;
-    private Date dataInteressado;
+    private Date dataAdocao;
     private boolean ativo; 
     
     public Adocao(Animal animal, Date dataAnuncio, List<Usuario> interessados,Usuario adotado, Date dataInteressado) {
         this.animal = animal;
         this.interessados = interessados;
         this.adotante = adotante;
-        this.dataInteressado = dataInteressado;
+        this.dataAdocao = dataInteressado;
     }
 
     public Adocao() {
@@ -99,11 +99,11 @@ public class Adocao implements Serializable{
 
     @Temporal(TemporalType.DATE)
     public Date getDataInteressado() {
-        return dataInteressado;
+        return dataAdocao;
     }
 
     public void setDataInteressado(Date dataInteressado) {
-        this.dataInteressado = dataInteressado;
+        this.dataAdocao = dataInteressado;
     }
 
     public boolean isAtivo() {
@@ -123,7 +123,7 @@ public class Adocao implements Serializable{
         hash = 67 * hash + Objects.hashCode(this.adotante);
         hash = 67 * hash + Objects.hashCode(this.interessados);
         hash = 67 * hash + Objects.hashCode(this.dataAnuncio);
-        hash = 67 * hash + Objects.hashCode(this.dataInteressado);
+        hash = 67 * hash + Objects.hashCode(this.dataAdocao);
         hash = 67 * hash + (this.ativo ? 1 : 0);
         return hash;
     }
@@ -155,7 +155,7 @@ public class Adocao implements Serializable{
         if (!Objects.equals(this.dataAnuncio, other.dataAnuncio)) {
             return false;
         }
-        if (!Objects.equals(this.dataInteressado, other.dataInteressado)) {
+        if (!Objects.equals(this.dataAdocao, other.dataAdocao)) {
             return false;
         }
         if (this.ativo != other.ativo) {
@@ -166,6 +166,6 @@ public class Adocao implements Serializable{
 
     @Override
     public String toString() {
-        return "Adocao{" + "codigo=" + codigo + ", animal=" + animal + ", anunciador=" + anunciador + ", adotante=" + adotante + ", interessados=" + interessados + ", dataAnuncio=" + dataAnuncio + ", dataInteressado=" + dataInteressado + ", ativo=" + ativo + '}';
+        return "Adocao{" + "codigo=" + codigo + ", animal=" + animal + ", anunciador=" + anunciador + ", adotante=" + adotante + ", interessados=" + interessados + ", dataAnuncio=" + dataAnuncio + ", dataInteressado=" + dataAdocao + ", ativo=" + ativo + '}';
     }
 }
