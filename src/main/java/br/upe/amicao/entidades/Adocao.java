@@ -24,22 +24,39 @@ import javax.persistence.TemporalType;
 public class Adocao implements Serializable{
     
     private Long codigo;
+    private String descricao;
     private Animal animal;
     private Usuario anunciador;
     private Usuario adotante;
     private List<Usuario> interessados;
     private Date dataAnuncio;
     private Date dataAdocao;
-    private boolean ativo; 
-    
-    public Adocao(Animal animal, Date dataAnuncio, List<Usuario> interessados,Usuario adotado, Date dataInteressado) {
-        this.animal = animal;
-        this.interessados = interessados;
-        this.adotante = adotante;
-        this.dataAdocao = dataInteressado;
-    }
+    private boolean ativo;
 
     public Adocao() {
+    }
+
+    public Adocao(String descricao, Animal animal, Usuario anunciador, Usuario adotante, List<Usuario> interessados, Date dataAnuncio, Date dataAdocao, boolean ativo) {
+        this.descricao = descricao;
+        this.animal = animal;
+        this.anunciador = anunciador;
+        this.adotante = adotante;
+        this.interessados = interessados;
+        this.dataAnuncio = dataAnuncio;
+        this.dataAdocao = dataAdocao;
+        this.ativo = ativo;
+    }
+
+    public Adocao(Long codigo, String descricao, Animal animal, Usuario anunciador, Usuario adotante, List<Usuario> interessados, Date dataAnuncio, Date dataAdocao, boolean ativo) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.animal = animal;
+        this.anunciador = anunciador;
+        this.adotante = adotante;
+        this.interessados = interessados;
+        this.dataAnuncio = dataAnuncio;
+        this.dataAdocao = dataAdocao;
+        this.ativo = ativo;
     }
 
     @Id
@@ -50,6 +67,14 @@ public class Adocao implements Serializable{
 
     public void setCodigo(Long Codigo) {
         this.codigo = Codigo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -106,6 +131,14 @@ public class Adocao implements Serializable{
         this.dataAdocao = dataInteressado;
     }
 
+    public Date getDataAdocao() {
+        return dataAdocao;
+    }
+
+    public void setDataAdocao(Date dataAdocao) {
+        this.dataAdocao = dataAdocao;
+    }
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -117,19 +150,23 @@ public class Adocao implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.codigo);
-        hash = 67 * hash + Objects.hashCode(this.animal);
-        hash = 67 * hash + Objects.hashCode(this.anunciador);
-        hash = 67 * hash + Objects.hashCode(this.adotante);
-        hash = 67 * hash + Objects.hashCode(this.interessados);
-        hash = 67 * hash + Objects.hashCode(this.dataAnuncio);
-        hash = 67 * hash + Objects.hashCode(this.dataAdocao);
-        hash = 67 * hash + (this.ativo ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.codigo);
+        hash = 71 * hash + Objects.hashCode(this.descricao);
+        hash = 71 * hash + Objects.hashCode(this.animal);
+        hash = 71 * hash + Objects.hashCode(this.anunciador);
+        hash = 71 * hash + Objects.hashCode(this.adotante);
+        hash = 71 * hash + Objects.hashCode(this.interessados);
+        hash = 71 * hash + Objects.hashCode(this.dataAnuncio);
+        hash = 71 * hash + Objects.hashCode(this.dataAdocao);
+        hash = 71 * hash + (this.ativo ? 1 : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -137,6 +174,12 @@ public class Adocao implements Serializable{
             return false;
         }
         final Adocao other = (Adocao) obj;
+        if (this.ativo != other.ativo) {
+            return false;
+        }
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
         if (!Objects.equals(this.codigo, other.codigo)) {
             return false;
         }
@@ -158,14 +201,11 @@ public class Adocao implements Serializable{
         if (!Objects.equals(this.dataAdocao, other.dataAdocao)) {
             return false;
         }
-        if (this.ativo != other.ativo) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Adocao{" + "codigo=" + codigo + ", animal=" + animal + ", anunciador=" + anunciador + ", adotante=" + adotante + ", interessados=" + interessados + ", dataAnuncio=" + dataAnuncio + ", dataInteressado=" + dataAdocao + ", ativo=" + ativo + '}';
+        return "Adocao{" + "codigo=" + codigo + ", descricao=" + descricao + ", animal=" + animal + ", anunciador=" + anunciador + ", adotante=" + adotante + ", interessados=" + interessados + ", dataAnuncio=" + dataAnuncio + ", dataAdocao=" + dataAdocao + ", ativo=" + ativo + '}';
     }
 }

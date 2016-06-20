@@ -6,5 +6,11 @@
 package br.upe.amicao.exceptions;
 
 public class RacaInexistenteException extends Exception {
+    public RacaInexistenteException(Exception e) {
+        super(e);
+    }
     
+    public RacaInexistenteException() {
+        super("Raça não encontrado!");
+    }
 }

@@ -6,6 +6,7 @@
 package br.upe.amicao.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,18 +14,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Raca implements Serializable {
     private Long codigo;
     private String nome;
-    private Classificacao classificacao;
-
-    public Raca(String nome) {
-        this.nome = nome;
-    }
+    private String classificacao;
+    private List<Animal> animais;
 
     public Raca() {
+    }
+
+    public Raca(String nome, String classificacao) {
+        this.nome = nome;
+        this.classificacao = classificacao;
+    }
+    
+    public Raca(String nome, String classificacao, List<Animal> animais) {
+        this.nome = nome;
+        this.classificacao = classificacao;
+        this.animais = animais;
     }
 
     @Id
@@ -45,13 +55,21 @@ public class Raca implements Serializable {
         this.nome = nome;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    public Classificacao getClassificacao() {
+    public String getClassificacao() {
         return classificacao;
     }
 
-    public void setClassificacao(Classificacao classificacao) {
+    public void setClassificacao(String classificacao) {
         this.classificacao = classificacao;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "raca")
+    public List<Animal> getAnimais() {
+        return animais;
+    }
+
+    public void setAnimais(List<Animal> animais) {
+        this.animais = animais;
     }
 
     @Override
@@ -86,7 +104,6 @@ public class Raca implements Serializable {
 
     @Override
     public String toString() {
-        return "Raca{" + "codigo=" + codigo + ", nome=" + nome + ", classificacao=" + classificacao +'}';
+        return "Raca{" + "codigo=" + codigo + ", nome=" + nome + ", classificacao=" + classificacao + ", animais=" + animais + '}';
     }
-  
 }

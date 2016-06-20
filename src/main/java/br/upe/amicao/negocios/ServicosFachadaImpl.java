@@ -5,114 +5,121 @@
  */
 package br.upe.amicao.negocios;
 
-import br.upe.amicao.listar.ListarAdocao;
-import br.upe.amicao.listar.ListarUsuario;
 import br.upe.amicao.exceptions.UsuarioExistenteException;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import br.upe.amicao.exceptions.RacaInexistenteException;
-import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.RacaExistenteException;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
-import br.upe.amicao.exceptions.ClassificacaoExistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
 import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
-import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
-import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
-import br.upe.amicao.exceptions.UsuarioNaoInteressadoExceptions;
-import java.util.Date;
+import br.upe.amicao.exceptions.AdocaoExistenteException;
+import br.upe.amicao.exceptions.AnimalExistenteException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServicosFachadaImpl implements ServicosFachada{
+public class ServicosFachadaImpl implements ServicosFachada {
 
     @Autowired
     private ServicosUsuario servicoUsuarios;
+    
     @Autowired
     private ServicosAdocao servicoAdocao;
+    
     @Autowired
     private ServicosAnimal servicoAnimal;
-    @Autowired
-    private ServicosClassificacao servicoClassificacao;
+    
     @Autowired
     private ServicosRaca servicoRaca;
-    
+
+    // ### USUÁRIO - START ###
     @Override
-    public void cadastrarUsuario(Usuario usuario) throws UsuarioExistenteException, UsuarioInexistenteException {
+    public void cadastrarUsuario(Usuario usuario) throws UsuarioExistenteException {
         servicoUsuarios.cadastrarUsuario(usuario);
     }
 
     @Override
-    public void atualizarUsuario(Usuario usuario, String emailAtualizar) throws UsuarioInexistenteException {
-         servicoUsuarios.atualizarUsuario(usuario, emailAtualizar);
+    public void atualizarUsuario(Usuario usuario) throws UsuarioInexistenteException {
+        servicoUsuarios.atualizarUsuario(usuario);
     }
 
     @Override
-    public void excluirUsuario(String email) throws UsuarioInexistenteException {
-        servicoUsuarios.excluirUsuario(email);
+    public void desativarUsuario(Usuario usuario) throws UsuarioInexistenteException {
+        servicoUsuarios.desativarUsuario(usuario);
     }
 
     @Override
-    public List<ListarUsuario> listarUsuario() {
+    public List<Usuario> listarUsuario() {
         return servicoUsuarios.listarUsuario();
     }
 
     @Override
-    public Usuario BuscarUsuarioPorEmail(String email) throws UsuarioInexistenteException {
-        return servicoUsuarios.BuscarUsuarioPorEmail(email);
+    public Usuario buscarUsuarioPorEmail(String email) throws UsuarioInexistenteException {
+        return servicoUsuarios.buscarUsuarioPorEmail(email);
     }
 
     @Override
-    public List<ListarUsuario> BuscarUsuarioPorNome(String nome) throws UsuarioInexistenteException {
-        return servicoUsuarios.BuscarUsuarioPorNome(nome);
+    public List<Usuario> buscarUsuarioPorNome(String nome) throws UsuarioInexistenteException {
+        return servicoUsuarios.buscarUsuarioPorNome(nome);
+    }
+    // ### USUÁRIO - END ###
+
+    // ### ADOÇÃO - START ###
+    @Override
+    public void cadastrarAdocao(Adocao adocao) throws AdocaoExistenteException {
+        servicoAdocao.cadastrarAdocao(adocao);
+    }
+    
+    @Override
+    public void atualizarAdocao(Adocao adocao) throws AdocaoInexistenteException {
+        servicoAdocao.atualizarAdocao(adocao);
     }
 
     @Override
-    public void cadastrarAdocao(Adocao adocao, Long codigoAnimal, String email) throws UsuarioInexistenteException {
-        servicoAdocao.cadastrarAdocao(adocao, codigoAnimal, email);
+    public void desativarAdocao(Adocao adocao) throws AdocaoInexistenteException {
+        servicoAdocao.desativarAdocao(adocao);
     }
 
     @Override
-    public void excluirAdocao(Long codigo) throws AdocaoInexistenteException {
-         servicoAdocao.excluirAdocao(codigo);
+    public List<Adocao> listarAdocoes() {
+        return servicoAdocao.listarAdocoes();
+    }
+    
+    @Override
+    public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorCodigo(codigo);
     }
 
     @Override
-    public List<ListarAdocao> listarAdocao() {
-        return servicoAdocao.listarAdocao();
+    public List<Adocao> buscarAdocaoPorAnimal(Animal animal) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorAnimal(animal);
+    }
+    
+    @Override
+    public List<Adocao> buscarAdocaoPorNomeAnimal(String nomeAnimal) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorNomeAnimal(nomeAnimal);
     }
 
     @Override
-    public List<ListarAdocao> buscarAdocaoPorAnimal(String nomeAnimal) {
-        return servicoAdocao.buscarAdocaoPorAnimal(nomeAnimal);
+    public List<Adocao> buscarAdocaoPorRaca(Raca raca) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorRaca(raca);
     }
 
     @Override
-    public List<ListarAdocao> buscarAdocaoPorClassificacao(String nomeClassificacao) {
-        return servicoAdocao.buscarAdocaoPorClassificacao(nomeClassificacao);
+    public List<Adocao> buscarAdocaoPorAnunciador(Usuario anunciador) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorAnunciador(anunciador);
     }
 
     @Override
-    public List<ListarAdocao> buscarAdocaoPorRaca(String nomeRaca) {
-        return servicoAdocao.buscarAdocaoPorRaca(nomeRaca);
+    public List<Adocao> buscarAdocaoPorAdotante(Usuario adotante) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorAdotante(adotante);
     }
 
-    @Override
-    public List<ListarAdocao> buscarAdocaoPorAnunciador(String nomeAnunciador){
-        return servicoAdocao.buscarAdocaoPorAnunciador(nomeAnunciador);
-    }
-
-    @Override
-    public List<ListarAdocao> buscarAdocaoPorAdotante(String nomeAdotante) {
-        return servicoAdocao.buscarAdocaoPorAdotante(nomeAdotante);
-    }
-
-    @Override
+    /*@Override
     public List<ListarAdocao> buscarPorData(Date data) {
         return servicoAdocao.buscarPorData(data);
     }
@@ -123,23 +130,25 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public void interesseAdocao(String email,long codigo)throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException{
+    public void interesseAdocao(String email, long codigo) throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException {
         servicoAdocao.interesseAdocao(email, codigo);
     }
 
     @Override
-    public void escolherAdotante(Long codigo, String nomeAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions{     
-       servicoAdocao.escolherAdotante(codigo, nomeAdotante);
+    public void escolherAdotante(Long codigo, String nomeAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions {
+        servicoAdocao.escolherAdotante(codigo, nomeAdotante);
+    }*/
+    // ### ADOÇÃO - END ###
+
+    // ### ANIMAL - START ###
+    @Override
+    public void cadastrarAnimal(Animal animal) throws AnimalExistenteException {
+        servicoAnimal.cadastrarAnimal(animal);
     }
 
     @Override
-    public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome) throws ClassificacaoInexistenteException, RacaInexistenteException {
-        servicoAnimal.cadastrarAnimal(animal, classificacaoNome, racaNome);
-    }
-
-    @Override
-    public void atualizarAnimal(Animal animal, Long codigoAtualizado, String classificacaoNome, String racaNome) throws AnimalInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException {
-        servicoAnimal.atualizarAnimal(animal, codigoAtualizado, classificacaoNome, racaNome);
+    public void atualizarAnimal(Animal animal) throws AnimalInexistenteException {
+        servicoAnimal.atualizarAnimal(animal);
     }
 
     @Override
@@ -148,8 +157,8 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public Animal consultarAnimalPorCodigo(Long codigo) throws AnimalInexistenteException {
-        return servicoAnimal.consultarAnimalPorCodigo(codigo);
+    public Animal buscarAnimalPorCodigo(Long codigo) throws AnimalInexistenteException {
+        return servicoAnimal.buscarAnimalPorCodigo(codigo);
     }
 
     @Override
@@ -158,48 +167,30 @@ public class ServicosFachadaImpl implements ServicosFachada{
     }
 
     @Override
-    public List<Animal> buscarAnimalPorNome(String nome) {
+    public List<Animal> buscarAnimalPorNome(String nome) throws AnimalInexistenteException {
         return servicoAnimal.buscarAnimalPorNome(nome);
     }
 
     @Override
-    public List<Animal> buscarAnimalPorClassificacao(String nomeClassificacao) {
-        return servicoAnimal.buscarAnimalPorClassificacao(nomeClassificacao);
-    }
-
-    @Override
-    public List<Animal> buscarAnimalPorRaca(String nomeRaca) {
-        return servicoAnimal.buscarAnimalPorRaca(nomeRaca);
+    public List<Animal> buscarAnimalPorRaca(Raca raca) throws AnimalInexistenteException {
+        return servicoAnimal.buscarAnimalPorRaca(raca);
     }
     
     @Override
-    public void cadastrarClassificacao(Classificacao classificacao) throws ClassificacaoExistenteException {
-        servicoClassificacao.cadastrarClassificacao(classificacao);
+    public List<Animal> buscarAnimalClassificacao(String classificacao) throws AnimalInexistenteException {
+        return servicoAnimal.buscarAnimalClassificacao(classificacao);
+    }
+    // ### ANIMAL - END ###
+
+    // ### RAçA - START ###
+    @Override
+    public void cadastrarRaca(Raca raca) throws RacaExistenteException {
+        servicoRaca.cadastrarRaca(raca);
     }
 
     @Override
-    public void atualizarClassificacao(String nomeAtual, String nomeAtualizar) throws ClassificacaoInexistenteException {
-        servicoClassificacao.atualizarClassificacao(nomeAtual, nomeAtualizar);
-    }
-
-    @Override
-    public List<Classificacao> listarClassificacao() {
-        return servicoClassificacao.listarClassificacao();
-    }
-
-    @Override
-    public Classificacao buscarClassificacaoPorNome(String nome) throws ClassificacaoInexistenteException {
-        return servicoClassificacao.buscarClassificacaoPorNome(nome);
-    }
-
-    @Override
-    public void cadastrarRaca(Raca raca, String classificacaoNome) throws RacaExistenteException, ClassificacaoInexistenteException {
-        servicoRaca.cadastrarRaca(raca, classificacaoNome);
-    }
-
-    @Override
-    public void atualizarRaca(String nomeAtual, String nomeAtualizar, String classificacaoNome) throws RacaInexistenteException, ClassificacaoInexistenteException {
-        servicoRaca.atualizarRaca(nomeAtual, nomeAtualizar, classificacaoNome);
+    public void atualizarRaca(Raca raca) throws RacaInexistenteException {
+        servicoRaca.atualizarRaca(raca);
     }
 
     @Override
@@ -216,5 +207,5 @@ public class ServicosFachadaImpl implements ServicosFachada{
     public List<Raca> buscarRacaPorClassificacao(String classificacaoNome) {
         return servicoRaca.buscarRacaPorClassificacao(classificacaoNome);
     }
-    
+    // ### RAçA - END ###
 }

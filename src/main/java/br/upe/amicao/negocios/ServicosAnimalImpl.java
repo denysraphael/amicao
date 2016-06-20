@@ -5,12 +5,11 @@
  */
 package br.upe.amicao.negocios;
 
-import br.upe.amicao.exceptions.RacaInexistenteException;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.entidades.Animal;
-import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.entidades.Raca;
+import br.upe.amicao.entidades.Usuario;
+import br.upe.amicao.exceptions.AnimalExistenteException;
 import br.upe.amicao.persistencia.RepositorioAnimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,83 +20,88 @@ import org.springframework.transaction.annotation.Transactional;
 public class ServicosAnimalImpl implements ServicosAnimal {
 
     @Autowired
-    private RepositorioAnimal repositorioAnimal;
-    @Autowired
-    private ServicosClassificacao servicosClassificacao;
+    private RepositorioAnimal repAnimal;
+
     @Autowired
     private ServicosRaca servicosRaca;
-    
-    
+
     @Override
-    @Transactional(rollbackFor = ClassificacaoInexistenteException.class)
-    public void cadastrarAnimal(Animal animal, String classificacaoNome, String racaNome) throws ClassificacaoInexistenteException, RacaInexistenteException {
-        Classificacao classificacao = servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome);
-        Raca raca = servicosRaca.buscarRacaPorNome(racaNome);
-        if(servicosClassificacao.buscarClassificacaoPorNome(classificacao.getNome())==null){
-            throw new ClassificacaoInexistenteException();
-        }
-        if (raca == null){
-            throw new RacaInexistenteException();
-        }
-        else{
-            animal.setClassificacao(classificacao);
-            animal.setRaca(raca);
-            Animal a = repositorioAnimal.save(animal);
-            animal.setCodigo(a.getCodigo());
+    @Transactional(rollbackFor = AnimalInexistenteException.class)
+    public void cadastrarAnimal(Animal animal) throws AnimalExistenteException {
+        try {
+            List<Animal> list = this.findByDono(animal.getDono());
+
+            if (!list.isEmpty()) {
+                throw new AnimalExistenteException();
+            }
+        } catch (AnimalInexistenteException e) {
+            repAnimal.save(animal);
         }
     }
 
     @Override
     @Transactional(rollbackFor = {AnimalInexistenteException.class})
-    public void atualizarAnimal(Animal animal, Long codigoAtualizado, String classificacaoNome, String racaNome) throws AnimalInexistenteException, ClassificacaoInexistenteException, RacaInexistenteException {
-        Animal animalAtualizar = repositorioAnimal.findOne(animal.getCodigo());
-        Classificacao classificacao = servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome);
-        Raca raca = servicosRaca.buscarRacaPorNome(racaNome);
-        if(animalAtualizar==null){
-            throw new AnimalInexistenteException();
-        }
-        if(classificacao == null){
-            throw new ClassificacaoInexistenteException();
-        }
-        if (raca == null){
-            throw new RacaInexistenteException();
-        }
-        else{
-            animal.setClassificacao(classificacao);
-            animal.setRaca(raca);
-            animal.setCodigo(animalAtualizar.getCodigo());
-            repositorioAnimal.save(animal);
+    public void atualizarAnimal(Animal animal) throws AnimalInexistenteException {
+        Animal animalAtualizar = this.buscarAnimalPorCodigo(animal.getCodigo());
+
+        if (animalAtualizar != null) {
+            animalAtualizar.setNome(animal.getNome());
+            animalAtualizar.setRaca(animal.getRaca());
+            animalAtualizar.setDono(animal.getDono());
+            animalAtualizar.setCaracteristicas(animal.getCaracteristicas());
+            animalAtualizar.setDataNascimento(animal.getDataNascimento());
+
+            repAnimal.save(animalAtualizar);
         }
     }
 
+    // VER ISSO AQUI
     @Override
     @Transactional(rollbackFor = AnimalInexistenteException.class)
     public void deletarAnimal(Long codigo) throws AnimalInexistenteException {
-        repositorioAnimal.delete(codigo);
+        repAnimal.delete(codigo);
     }
-
+    // VER ISSO AQUI
+    
     @Override
-    public Animal consultarAnimalPorCodigo(Long codigo) throws AnimalInexistenteException {
-        return repositorioAnimal.findOne(codigo);
+    public Animal buscarAnimalPorCodigo(Long codigo) throws AnimalInexistenteException {
+        Animal a = repAnimal.findByCodigo(codigo);
+        
+        if (a == null) {
+            throw new AnimalInexistenteException();
+        }
+        
+        return a;
     }
 
     @Override
     public List<Animal> listarAnimal() {
-        return (List<Animal>) repositorioAnimal.findAll();
+        return (List<Animal>) repAnimal.findAllByOrderByCodigoAsc();
     }
 
     @Override
-    public List<Animal> buscarAnimalPorNome(String nome) {
-        return (List<Animal>) repositorioAnimal.findByNome(nome);
+    public List<Animal> buscarAnimalPorNome(String nome) throws AnimalInexistenteException {
+        return (List<Animal>) repAnimal.findByNome(nome);
     }
 
     @Override
-    public List<Animal> buscarAnimalPorClassificacao(String nomeClassificacao) {
-        return(List<Animal>) repositorioAnimal.buscarPorClassificao(nomeClassificacao);
+    public List<Animal> buscarAnimalPorRaca(Raca raca) throws AnimalInexistenteException {
+        return (List<Animal>) repAnimal.findByRaca(raca);
+    }
+    
+    @Override
+    public List<Animal> buscarAnimalClassificacao(String classificacao) throws AnimalInexistenteException {
+        return (List<Animal>) repAnimal.findByCaracteristicas(classificacao);
     }
 
-    @Override
-    public List<Animal> buscarAnimalPorRaca(String nomeRaca) {
-        return(List<Animal>) repositorioAnimal.buscarPorRaca(nomeRaca);
+
+    private List<Animal> findByDono(Usuario dono) throws AnimalInexistenteException {
+        List<Animal> temp = repAnimal.findByDono(dono);
+
+        if (temp.isEmpty()) {
+            throw new AnimalInexistenteException();
+        }
+
+        return temp;
     }
 }

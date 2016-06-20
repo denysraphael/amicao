@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Usuario implements Serializable {
 
@@ -32,7 +31,11 @@ public class Usuario implements Serializable {
     private List<Adocao> adocoesRealizadas;
     private boolean ativo;
     
-     public Usuario(String email, String nome, String senha, String telefone) {
+    public Usuario() {
+        this.ativo = true;
+    }
+    
+    public Usuario(String email, String nome, String senha, String telefone) {
         this.nome = nome;
         this.senha = senha;
         this.email = email;
@@ -44,12 +47,20 @@ public class Usuario implements Serializable {
         this.adocoesRealizadas = new ArrayList<Adocao>();
     }
 
-    public Usuario() {
-        this.ativo = true;
+    public Usuario(String email, String nome, String senha, String telefone, List<Animal> animais, List<Adocao> adocoesAnunciadas, List<Adocao> adocoesInteressadas, List<Adocao> adocoesRealizadas, boolean ativo) {
+        this.email = email;
+        this.nome = nome;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.animais = animais;
+        this.adocoesAnunciadas = adocoesAnunciadas;
+        this.adocoesInteressadas = adocoesInteressadas;
+        this.adocoesRealizadas = adocoesRealizadas;
+        this.ativo = ativo;
     }
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getCodigo() {
         return codigo;
     }
@@ -90,7 +101,7 @@ public class Usuario implements Serializable {
         this.telefone = telefone;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dono")
     public List<Animal> getAnimais() {
         return animais;
     }
@@ -125,7 +136,7 @@ public class Usuario implements Serializable {
     public void setAdocoesRealizadas(List<Adocao> adocoesRealizadas) {
         this.adocoesRealizadas = adocoesRealizadas;
     }
-    
+
     public boolean isAtivo() {
         return ativo;
     }

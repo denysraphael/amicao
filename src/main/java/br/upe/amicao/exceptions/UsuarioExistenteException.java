@@ -7,4 +7,11 @@ package br.upe.amicao.exceptions;
 
 public class UsuarioExistenteException extends Exception {
     
+    public UsuarioExistenteException(Exception e) {
+        super(e);
+    }
+    
+    public UsuarioExistenteException() {
+        super("O usuário já está cadastrado no sistema!");
+    }
 }

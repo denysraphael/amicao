@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("adocao")
 public class WSControllerAdocao {
     
-    static Logger log = Logger.getLogger(WSControllerAdocao.class);
+    /*static Logger log = Logger.getLogger(WSControllerAdocao.class);
     @Autowired
     private ServicosFachada fachada;
     
@@ -100,5 +100,5 @@ public class WSControllerAdocao {
     @RequestMapping(value = "/buscarPorData")
     public @ResponseBody List<ListarAdocao> buscarAdocaoPorData(Date data) {
         return fachada.buscarPorData(data);
-    }
+    }*/
 }

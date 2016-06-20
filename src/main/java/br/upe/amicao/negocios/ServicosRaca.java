@@ -7,15 +7,19 @@ package br.upe.amicao.negocios;
 
 import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.RacaExistenteException;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.entidades.Raca;
 import java.io.Serializable;
 import java.util.List;
 
-public interface ServicosRaca extends Serializable{
-    public void cadastrarRaca(Raca raca, String classificacaoNome) throws RacaExistenteException, ClassificacaoInexistenteException;
-    public void atualizarRaca(String nomeAtual, String nomeAtualizar, String classificacaoNome) throws RacaInexistenteException, ClassificacaoInexistenteException;
+public interface ServicosRaca extends Serializable {
+
+    public void cadastrarRaca(Raca raca) throws RacaExistenteException;
+
+    public void atualizarRaca(Raca raca) throws RacaInexistenteException;
+
     public List<Raca> listarRaca();
+
     public Raca buscarRacaPorNome(String nome) throws RacaInexistenteException;
+
     public List<Raca> buscarRacaPorClassificacao(String classificacaoNome);
 }

@@ -19,22 +19,23 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Animal implements Serializable {
+
     private Long codigo;
-    private Classificacao classificacao;
     private String nome;
     private Raca raca;
     private String caracteristicas;
     private Date dataNascimento;
+    private Usuario dono;
 
-    public Animal(Classificacao classificacao, Raca raca,String nome, String caracteristicas, Date dataNascimento) {
-        this.classificacao = classificacao;
+    public Animal() {
+    }
+
+    public Animal(Raca raca, String nome, String caracteristicas, Date dataNascimento, Usuario dono) {
         this.raca = raca;
         this.nome = nome;
         this.caracteristicas = caracteristicas;
         this.dataNascimento = dataNascimento;
-    }
-
-    public Animal() {
+        this.dono = dono;
     }
 
     @Id
@@ -47,16 +48,7 @@ public class Animal implements Serializable {
         this.codigo = codigo;
     }
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    public Classificacao getClassificacao() {
-        return classificacao;
-    }
-
-    public void setClassificacao(Classificacao classificacao) {
-        this.classificacao = classificacao;
-    }
-    
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     public Raca getRaca() {
         return raca;
     }
@@ -88,23 +80,34 @@ public class Animal implements Serializable {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }    
-    
+    }
+
+    @ManyToOne
+    public Usuario getDono() {
+        return dono;
+    }
+
+    public void setDono(Usuario dono) {
+        this.dono = dono;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.codigo);
-        hash = 67 * hash + Objects.hashCode(this.classificacao);
-        hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + Objects.hashCode(this.raca);
-        hash = 67 * hash + Objects.hashCode(this.caracteristicas);
-        hash = 67 * hash + Objects.hashCode(this.dataNascimento);
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.codigo);
+        hash = 47 * hash + Objects.hashCode(this.nome);
+        hash = 47 * hash + Objects.hashCode(this.raca);
+        hash = 47 * hash + Objects.hashCode(this.caracteristicas);
+        hash = 47 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 47 * hash + Objects.hashCode(this.dono);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -112,22 +115,22 @@ public class Animal implements Serializable {
             return false;
         }
         final Animal other = (Animal) obj;
-        if (!Objects.equals(this.codigo, other.codigo)) {
-            return false;
-        }
-        if (!Objects.equals(this.classificacao, other.classificacao)) {
-            return false;
-        }
         if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.raca, other.raca)) {
             return false;
         }
         if (!Objects.equals(this.caracteristicas, other.caracteristicas)) {
             return false;
         }
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.raca, other.raca)) {
+            return false;
+        }
         if (!Objects.equals(this.dataNascimento, other.dataNascimento)) {
+            return false;
+        }
+        if (!Objects.equals(this.dono, other.dono)) {
             return false;
         }
         return true;
@@ -135,6 +138,6 @@ public class Animal implements Serializable {
 
     @Override
     public String toString() {
-        return "Animal{" + "codigo=" + codigo + ", classificacao=" + classificacao + ", nome=" + nome + ", raca=" + raca + ", caracteristicas=" + caracteristicas + ", dataNascimento=" + dataNascimento + '}';
+        return "Animal{" + "codigo=" + codigo + ", nome=" + nome + ", raca=" + raca + ", caracteristicas=" + caracteristicas + ", dataNascimento=" + dataNascimento + ", dono=" + dono + '}';
     }
 }

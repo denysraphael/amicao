@@ -6,5 +6,11 @@
 package br.upe.amicao.exceptions;
 
 public class AdocaoInexistenteException extends Exception {
+    public AdocaoInexistenteException(Exception e) {
+        super(e);
+    }
     
+    public AdocaoInexistenteException() {
+        super("A adoção não foi encontrada!");
+    }
 }

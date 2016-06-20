@@ -7,7 +7,6 @@ package br.upe.amicao.ui;
 
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.negocios.ServicosFachada;
 import java.util.List;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/animal")
 public class WSControllerAnimal {
-    static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(WSControllerAnimal.class);
+    /*static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(WSControllerAnimal.class);
     @Autowired
     private ServicosFachada fachada;
     
@@ -96,6 +95,6 @@ public class WSControllerAnimal {
         return "excluirAnimal";
     }
     
- 
+*/
     
 }

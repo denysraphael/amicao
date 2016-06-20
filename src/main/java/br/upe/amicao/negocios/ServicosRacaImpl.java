@@ -5,10 +5,8 @@
  */
 package br.upe.amicao.negocios;
 
-import br.upe.amicao.entidades.Classificacao;
 import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.exceptions.RacaExistenteException;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.persistencia.RepositorioRaca;
 import java.util.List;
@@ -20,48 +18,54 @@ import org.springframework.transaction.annotation.Transactional;
 public class ServicosRacaImpl implements ServicosRaca{
 
     @Autowired
-    private RepositorioRaca repositorioRaca;
-    @Autowired
-    private ServicosClassificacao servicosClassificacao;
+    private RepositorioRaca repRaca;
       
     @Override
     @Transactional(rollbackFor = RacaExistenteException.class)
-    public void cadastrarRaca(Raca raca, String classificacaoNome) throws RacaExistenteException, ClassificacaoInexistenteException {
-        if(repositorioRaca.findByNome(raca.getNome())!=null){
-            throw new RacaExistenteException();
-        }
-        else{
-            raca.setClassificacao(servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome));
-            Raca r = repositorioRaca.save(raca);
-            raca.setCodigo(r.getCodigo());
+    public void cadastrarRaca(Raca raca) throws RacaExistenteException {
+        try {
+            Raca r = this.buscarRacaPorNome(raca.getNome());
+            if (r != null) {
+                throw new RacaExistenteException();
+            }
+        } catch (RacaInexistenteException e) {
+            repRaca.save(raca);
         }
     }
 
     @Override
     @Transactional(rollbackFor = RacaInexistenteException.class)
-    public void atualizarRaca(String nomeAtual, String nomeAtualizar,String classificacaoNome) throws RacaInexistenteException, ClassificacaoInexistenteException {
-        Raca racaAtualizar = repositorioRaca.findByNome(nomeAtual);
-        if(racaAtualizar==null){
-            throw new RacaInexistenteException();
+    public void atualizarRaca(Raca raca) throws RacaInexistenteException {
+        Raca racaAtualizar = this.buscarRacaPorNome(raca.getNome());
+        
+        if (racaAtualizar != null) {
+            racaAtualizar.setAnimais(raca.getAnimais());
+            racaAtualizar.setClassificacao(raca.getClassificacao());
+            racaAtualizar.setNome(raca.getNome());
+            
+            repRaca.save(racaAtualizar);
         }
-        racaAtualizar.setNome(nomeAtualizar);
-        racaAtualizar.setClassificacao(servicosClassificacao.buscarClassificacaoPorNome(classificacaoNome));
-        repositorioRaca.save(racaAtualizar);
     }
 
     @Override
     public List<Raca> listarRaca() {
-        return (List<Raca>) repositorioRaca.findAll();
+        return (List<Raca>) repRaca.findAll();
     }
 
     @Override
     public Raca buscarRacaPorNome(String nome) throws RacaInexistenteException {
-        return repositorioRaca.findByNome(nome);
+        Raca r = repRaca.findByNome(nome);
+        
+        if (r == null) {
+            throw new RacaInexistenteException();
+        }
+        
+        return r;
     }
 
     @Override
     public List<Raca> buscarRacaPorClassificacao(String classificacaoNome) {
-        return(List<Raca>) repositorioRaca.buscarPorClassificacao(classificacaoNome);
+        return(List<Raca>) repRaca.findByClassificacao(classificacaoNome);
     }
     
 }

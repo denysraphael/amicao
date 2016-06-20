@@ -7,4 +7,11 @@ package br.upe.amicao.exceptions;
 
 public class UsuarioInexistenteException extends Exception {
     
+    public UsuarioInexistenteException(Exception e) {
+        super(e);
+    }
+    
+    public UsuarioInexistenteException() {
+        super("O usuário não encontrado!");
+    }
 }

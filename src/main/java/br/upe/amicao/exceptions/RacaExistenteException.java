@@ -6,5 +6,11 @@
 package br.upe.amicao.exceptions;
 
 public class RacaExistenteException extends Exception {
+    public RacaExistenteException(Exception e) {
+        super(e);
+    }
     
+    public RacaExistenteException() {
+        super("A raça já está cadastrado no sistema!");
+    }
 }

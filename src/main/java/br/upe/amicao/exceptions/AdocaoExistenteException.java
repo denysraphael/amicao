@@ -6,5 +6,11 @@
 package br.upe.amicao.exceptions;
 
 public class AdocaoExistenteException extends Exception {
+    public AdocaoExistenteException(Exception e) {
+        super(e);
+    }
     
+    public AdocaoExistenteException() {
+        super("A adoção já está cadastrado no sistema!");
+    }
 }

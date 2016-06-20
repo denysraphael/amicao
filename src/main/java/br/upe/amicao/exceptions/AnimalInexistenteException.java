@@ -6,5 +6,11 @@
 package br.upe.amicao.exceptions;
 
 public class AnimalInexistenteException extends Exception {
+    public AnimalInexistenteException(Exception e) {
+        super(e);
+    }
     
+    public AnimalInexistenteException() {
+        super("O animal não foi encontrado!");
+    }
 }

@@ -12,13 +12,55 @@ import br.upe.amicao.entidades.Usuario;
 import java.io.Serializable;
 import java.util.List;
 
-public interface ServicosUsuario extends Serializable{
-    
-    public void cadastrarUsuario(Usuario usuario) throws UsuarioExistenteException, UsuarioInexistenteException;
-    public void atualizarUsuario(Usuario usuario, String emailAtualizar) throws UsuarioInexistenteException;
-    public void excluirUsuario(String email) throws UsuarioInexistenteException;
-    public List<ListarUsuario> listarUsuario();
-    public Usuario BuscarUsuarioPorEmail(String email) throws UsuarioInexistenteException;
-    public List<ListarUsuario> BuscarUsuarioPorNome(String nome) throws UsuarioInexistenteException;
-    
+public interface ServicosUsuario extends Serializable {
+
+    /**
+     * Cadastrar um Usuário
+     *
+     * @param usuario
+     * @throws UsuarioExistenteException
+     */
+    public void cadastrarUsuario(Usuario usuario) throws UsuarioExistenteException;
+
+    /**
+     * Atualiza um Usuário
+     *
+     * @param usuario
+     * @throws UsuarioInexistenteException
+     */
+    public void atualizarUsuario(Usuario usuario) throws UsuarioInexistenteException;
+
+    /**
+     * Exclui um Usuário
+     *
+     * @param usuario
+     * @throws UsuarioInexistenteException
+     */
+    public void desativarUsuario(Usuario usuario) throws UsuarioInexistenteException;
+
+    /**
+     * Lista todos os usuários
+     *
+     * @return Lista de Usuários
+     */
+    public List<Usuario> listarUsuario();
+
+    /**
+     * Busca um Usuário por email
+     *
+     * @param email
+     * @return Usuário
+     * @throws UsuarioInexistenteException
+     */
+    public Usuario buscarUsuarioPorEmail(String email) throws UsuarioInexistenteException;
+
+    /**
+     * Busca Usuários pelo Nome
+     *
+     * @param nome
+     * @return
+     * @throws UsuarioInexistenteException
+     */
+    public List<Usuario> buscarUsuarioPorNome(String nome) throws UsuarioInexistenteException;
+
 }

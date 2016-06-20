@@ -6,7 +6,6 @@
 package br.upe.amicao.ui;
 
 import br.upe.amicao.entidades.Raca;
-import br.upe.amicao.exceptions.ClassificacaoInexistenteException;
 import br.upe.amicao.exceptions.RacaExistenteException;
 import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.negocios.ServicosFachada;
@@ -32,7 +31,7 @@ public class WSControllerRaca {
         return fachada.listarRaca();
     }
     
-    @RequestMapping(value = "/cadastrar", produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@RequestMapping(value = "/cadastrar", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> cadastrarRaca(Raca raca, String classificacaoNome) {
         try{
             fachada.cadastrarRaca(raca, classificacaoNome);
@@ -83,5 +82,5 @@ public class WSControllerRaca {
         return "buscaRaca";
     }
     
-    
+    */
 }
