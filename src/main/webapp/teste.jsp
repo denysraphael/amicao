@@ -5,34 +5,43 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
+
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>User Register</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+        <script type="text/javascript">
+            var app = angular.module("aplicacao", []);
+
+            app.controller("ControladorUsuario", ["$http", function ($http) {
+                    this.enviar = function () {
+                        console.dir(this.usuario);
+                        
+                        var dados = {"nome" : this.usuario.nome,
+                                    "email" : this.usuario.email,
+                                    "telefone" : this.usuario.telefone,
+                                    "senha" : this.usuario.senha,
+                                    "animais" : null,
+                                    "adocoesAnunciadas" : null,
+                                    "adocoesInteressadas" : null,
+                                    "adocoesRealizadas" : null,
+                                    "ativo" : true};
+
+                        var response = $http.post("cadastrar", dados);
+                        console.dir(response);
+                    };
+                }]);
+        </script>
     </head>
-    <body>
-        <form:form method="POST" action="cadastrar" modelAttribute="user">
-            <h1>Cadastro Usuario</h1>
-            <div>
-                <form:label path="name">Nome: </form:label>
-                <form:input path="name"/>
-            </div>
-            <div>
-                <form:label path="email">E-mail: </form:label>
-                <form:input path="email"/>
-            </div>
-            <div>
-                <form:label path="phone">Telefone: </form:label>
-                <form:input path="phone"/>
-            </div>
-            <div>
-                <form:label path="password">Senha: </form:label>
-                <form:input path="password"/>
-            </div>
-            <div><input type="submit" value="Enviar"></div>
-        </form:form>
+    <body ng-app="aplicacao">
+        <h1>Cadastro Usuário</h1>
+        <form ng-controller="ControladorUsuario as contUser">
+            Nome: <input type="text" name="nome" ng-model="contUser.usuario.nome">
+            Email: <input type="email" name="email" ng-model="contUser.usuario.email">
+            Telefone: <input type="texte" name="telefone" ng-model="contUser.usuario.telefone">
+            Senha: <input type="password" name="senha" ng-model="contUser.usuario.senha">
+            <input type="button" value="Cadastrar" ng-click="contUser.enviar()"></div>
+        </form>
     </body>
 </html>

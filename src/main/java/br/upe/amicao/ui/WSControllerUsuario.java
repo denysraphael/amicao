@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-@RequestMapping("/usuario")
+//@RequestMapping("/usuario")
 public class WSControllerUsuario {
 
     private static Logger log = Logger.getLogger(WSControllerUsuario.class);
@@ -45,8 +45,8 @@ public class WSControllerUsuario {
         }
     }
     
-    @RequestMapping(params = "/cadastrar", method = RequestMethod.POST)
-    public ResponseEntity<?> cadastrarUsuario(@ModelAttribute("user") Usuario u) {
+    @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity<?> cadastrarUsuario(Usuario u) {
         try {
             if (u.getNome() != null) {
                 this.fachada.cadastrarUsuario(u);
