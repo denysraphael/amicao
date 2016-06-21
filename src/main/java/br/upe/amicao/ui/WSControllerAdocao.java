@@ -10,7 +10,6 @@ import br.upe.amicao.exceptions.AdocaoInexistenteException;
 import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
 import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
-import br.upe.amicao.listar.ListarAdocao;
 import br.upe.amicao.negocios.ServicosFachada;
 import java.util.Date;
 import java.util.List;

@@ -6,7 +6,6 @@
 package br.upe.amicao.negocios;
 
 import br.upe.amicao.exceptions.AdocaoJaRealizadaException;
-import br.upe.amicao.listar.ListarAdocao;
 import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.AdocaoInexistenteException;
 import br.upe.amicao.entidades.Adocao;

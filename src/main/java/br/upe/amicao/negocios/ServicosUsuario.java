@@ -5,7 +5,6 @@
  */
 package br.upe.amicao.negocios;
 
-import br.upe.amicao.listar.ListarUsuario;
 import br.upe.amicao.exceptions.UsuarioExistenteException;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import br.upe.amicao.entidades.Usuario;

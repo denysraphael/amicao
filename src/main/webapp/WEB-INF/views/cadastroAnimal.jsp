@@ -14,10 +14,9 @@
     <body>
        <form action="cadastrar" method="POST">
             <h1>Cadastro Animal</h1>
-            <div>Classificacao: <input type="text" name="classificacao"></div>
             <div>Nome: <input type="text" name="nome"></div>
             <div>Raca: <input type="text" name="raca"></div>
-            <div>Caracteristicas: <input type="texte" name="caracteristicas"></div>
+            <div>Caracteristicas: <input type="text" name="caracteristicas"></div>
             <div>Data: <input type="date" name="dataNascimento"></div>
             <div><input type="submit" value="Enviar"></div>
         </form>

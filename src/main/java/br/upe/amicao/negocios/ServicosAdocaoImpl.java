@@ -5,7 +5,6 @@
  */
 package br.upe.amicao.negocios;
 
-import br.upe.amicao.listar.ListarAdocao;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import br.upe.amicao.exceptions.ProprioUsuarioAnunciadorException;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
@@ -51,6 +50,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao {
                         throw new AdocaoExistenteException();
                     }
                 }
+                
+                repAdocao.save(adocao);
             }
         } catch (AdocaoInexistenteException e) {
             repAdocao.save(adocao);

@@ -9,7 +9,6 @@ import br.upe.amicao.entidades.Adocao;
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
-import br.upe.amicao.listar.ListarAdocao;
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;

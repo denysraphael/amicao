@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-//@RequestMapping("/usuario")
+@RequestMapping("/usuario")
 public class WSControllerUsuario {
 
     private static Logger log = Logger.getLogger(WSControllerUsuario.class);
