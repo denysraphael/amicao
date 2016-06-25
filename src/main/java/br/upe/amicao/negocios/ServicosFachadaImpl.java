@@ -56,10 +56,20 @@ public class ServicosFachadaImpl implements ServicosFachada {
     public List<Usuario> listarUsuario() {
         return servicoUsuarios.listarUsuario();
     }
+    
+    @Override
+    public Usuario buscarUsuarioPorCodigo(Long codigo) throws UsuarioInexistenteException {
+        return servicoUsuarios.buscarUsuarioPorCodigo(codigo);
+    }
 
     @Override
     public Usuario buscarUsuarioPorEmail(String email) throws UsuarioInexistenteException {
         return servicoUsuarios.buscarUsuarioPorEmail(email);
+    }
+    
+    @Override
+    public Usuario buscarUsuarioPorEmailESenha(String email, String senha) throws UsuarioInexistenteException {
+        return servicoUsuarios.buscarUsuarioPorEmailESenha(email, senha);
     }
 
     @Override
@@ -105,8 +115,13 @@ public class ServicosFachadaImpl implements ServicosFachada {
     }
 
     @Override
-    public List<Adocao> buscarAdocaoPorRaca(Raca raca) throws AdocaoInexistenteException {
-        return servicoAdocao.buscarAdocaoPorRaca(raca);
+    public List<Adocao> buscarAdocaoPorRaca(String nomeRaca) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorRaca(nomeRaca);
+    }
+    
+    @Override
+    public List<Adocao> buscarAdocaoPorDescricao(String descricao) throws AdocaoInexistenteException {
+        return servicoAdocao.buscarAdocaoPorDescricao(descricao);
     }
 
     @Override
@@ -118,32 +133,12 @@ public class ServicosFachadaImpl implements ServicosFachada {
     public List<Adocao> buscarAdocaoPorAdotante(Usuario adotante) throws AdocaoInexistenteException {
         return servicoAdocao.buscarAdocaoPorAdotante(adotante);
     }
-
-    /*@Override
-    public List<ListarAdocao> buscarPorData(Date data) {
-        return servicoAdocao.buscarPorData(data);
-    }
-
-    @Override
-    public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException {
-        return servicoAdocao.buscarAdocaoPorCodigo(codigo);
-    }
-
-    @Override
-    public void interesseAdocao(String email, long codigo) throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException {
-        servicoAdocao.interesseAdocao(email, codigo);
-    }
-
-    @Override
-    public void escolherAdotante(Long codigo, String nomeAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions {
-        servicoAdocao.escolherAdotante(codigo, nomeAdotante);
-    }*/
     // ### ADOÇÃO - END ###
 
     // ### ANIMAL - START ###
     @Override
-    public void cadastrarAnimal(Animal animal) throws AnimalExistenteException {
-        servicoAnimal.cadastrarAnimal(animal);
+    public void cadastrarAnimal(Animal animal, String raca, String classificacao) throws AnimalExistenteException {
+        servicoAnimal.cadastrarAnimal(animal, raca, classificacao);
     }
 
     @Override
@@ -169,6 +164,16 @@ public class ServicosFachadaImpl implements ServicosFachada {
     @Override
     public List<Animal> buscarAnimalPorNome(String nome) throws AnimalInexistenteException {
         return servicoAnimal.buscarAnimalPorNome(nome);
+    }
+    
+    @Override
+    public Animal buscarAnimalPorDono(Usuario dono, String nomeAnimal) throws AnimalInexistenteException {
+        return servicoAnimal.buscarAnimalPorDono(dono, nomeAnimal);
+    }
+    
+    @Override
+    public List<Animal> buscarAnimalPorCaracteristicas(String caracteristicas) throws AnimalInexistenteException {
+        return servicoAnimal.buscarAnimalPorCaracteristicas(caracteristicas);
     }
 
     @Override

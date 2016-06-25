@@ -10,8 +10,12 @@ import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.AnimalExistenteException;
+import br.upe.amicao.exceptions.RacaExistenteException;
+import br.upe.amicao.exceptions.RacaInexistenteException;
 import br.upe.amicao.persistencia.RepositorioAnimal;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,15 +31,31 @@ public class ServicosAnimalImpl implements ServicosAnimal {
 
     @Override
     @Transactional(rollbackFor = AnimalInexistenteException.class)
-    public void cadastrarAnimal(Animal animal) throws AnimalExistenteException {
+    public void cadastrarAnimal(Animal animal, String raca, String classificacao) throws AnimalExistenteException {
         try {
-            List<Animal> list = this.findByDono(animal.getDono());
+            Animal temp = this.buscarAnimalPorDono(animal.getDono(), animal.getNome());
 
-            if (!list.isEmpty()) {
+            if (temp == null) {
                 throw new AnimalExistenteException();
             }
         } catch (AnimalInexistenteException e) {
-            repAnimal.save(animal);
+            try {
+                Raca r = this.servicosRaca.buscarRacaPorNome(raca);
+
+                animal.setRaca(r);
+                this.repAnimal.save(animal);
+            } catch (RacaInexistenteException ex) {
+                try {
+                    Raca r = new Raca(raca, classificacao);
+                    this.servicosRaca.cadastrarRaca(r);
+                    Raca r2 = this.servicosRaca.buscarRacaPorNome(r.getNome());
+
+                    animal.setRaca(r2);
+                    this.repAnimal.save(animal);
+                } catch (RacaExistenteException | RacaInexistenteException ex1) {
+                    Logger.getLogger(ServicosAnimalImpl.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
         }
     }
 
@@ -62,15 +82,15 @@ public class ServicosAnimalImpl implements ServicosAnimal {
         repAnimal.delete(codigo);
     }
     // VER ISSO AQUI
-    
+
     @Override
     public Animal buscarAnimalPorCodigo(Long codigo) throws AnimalInexistenteException {
         Animal a = repAnimal.findByCodigo(codigo);
-        
+
         if (a == null) {
             throw new AnimalInexistenteException();
         }
-        
+
         return a;
     }
 
@@ -85,23 +105,34 @@ public class ServicosAnimalImpl implements ServicosAnimal {
     }
 
     @Override
-    public List<Animal> buscarAnimalPorRaca(Raca raca) throws AnimalInexistenteException {
-        return (List<Animal>) repAnimal.findByRaca(raca);
-    }
-    
-    @Override
-    public List<Animal> buscarAnimalClassificacao(String classificacao) throws AnimalInexistenteException {
-        return (List<Animal>) repAnimal.findByCaracteristicas(classificacao);
-    }
+    public Animal buscarAnimalPorDono(Usuario dono, String nomeAnimal) throws AnimalInexistenteException {
+        Animal temp = repAnimal.findAnimalPorDonoENome(dono, nomeAnimal);
 
-
-    private List<Animal> findByDono(Usuario dono) throws AnimalInexistenteException {
-        List<Animal> temp = repAnimal.findByDono(dono);
-
-        if (temp.isEmpty()) {
+        if (temp == null) {
             throw new AnimalInexistenteException();
         }
 
         return temp;
+    }
+    
+    @Override
+    public List<Animal> buscarAnimalPorCaracteristicas(String caracteristicas) throws AnimalInexistenteException {
+        List<Animal> temp = repAnimal.findByCaracteristicas(caracteristicas);
+        
+        if (temp.isEmpty()) {
+            throw new AnimalInexistenteException();
+        }
+        
+        return temp;
+    }
+
+    @Override
+    public List<Animal> buscarAnimalPorRaca(Raca raca) throws AnimalInexistenteException {
+        return (List<Animal>) repAnimal.findByRaca(raca);
+    }
+
+    @Override
+    public List<Animal> buscarAnimalClassificacao(String classificacao) throws AnimalInexistenteException {
+        return (List<Animal>) repAnimal.findByCaracteristicas(classificacao);
     }
 }

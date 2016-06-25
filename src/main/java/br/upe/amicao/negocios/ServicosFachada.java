@@ -31,44 +31,40 @@ public interface ServicosFachada extends Serializable {
     public void desativarUsuario(Usuario usuario) throws UsuarioInexistenteException;
 
     public List<Usuario> listarUsuario();
+    
+    public Usuario buscarUsuarioPorCodigo(Long codigo) throws UsuarioInexistenteException;
 
     public Usuario buscarUsuarioPorEmail(String email) throws UsuarioInexistenteException;
+
+    public Usuario buscarUsuarioPorEmailESenha(String email, String senha) throws UsuarioInexistenteException;
 
     public List<Usuario> buscarUsuarioPorNome(String nome) throws UsuarioInexistenteException;
 
     //Adocao
     public void cadastrarAdocao(Adocao adocao) throws AdocaoExistenteException;
-    
+
     public void atualizarAdocao(Adocao adocao) throws AdocaoInexistenteException;
 
     public void desativarAdocao(Adocao adocao) throws AdocaoInexistenteException;
 
     public List<Adocao> listarAdocoes();
-    
+
     public Adocao buscarAdocaoPorCodigo(Long codigo) throws AdocaoInexistenteException;
 
     public List<Adocao> buscarAdocaoPorAnimal(Animal animal) throws AdocaoInexistenteException;
-    
+
     public List<Adocao> buscarAdocaoPorNomeAnimal(String nomeAnimal) throws AdocaoInexistenteException;
-    
-    public List<Adocao> buscarAdocaoPorRaca(Raca raca) throws AdocaoInexistenteException;
 
-    //public List<ListarAdocao> buscarAdocaoPorClassificacao(String nomeClassificacao);
+    public List<Adocao> buscarAdocaoPorRaca(String nomeRaca) throws AdocaoInexistenteException;
 
-    //public List<ListarAdocao> buscarAdocaoPorRaca(String nomeRaca);
+    public List<Adocao> buscarAdocaoPorDescricao(String descricao) throws AdocaoInexistenteException;
 
     public List<Adocao> buscarAdocaoPorAnunciador(Usuario anunciador) throws AdocaoInexistenteException;
 
     public List<Adocao> buscarAdocaoPorAdotante(Usuario adotante) throws AdocaoInexistenteException;
 
-    //public List<ListarAdocao> buscarPorData(Date data);
-
-    //public void interesseAdocao(String email, long codigo) throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException;
-
-    //public void escolherAdotante(Long codigo, String nomeAdotante) throws AdocaoInexistenteException, UsuarioNaoInteressadoExceptions;
-
     //Animal
-    public void cadastrarAnimal(Animal animal) throws AnimalExistenteException;
+    public void cadastrarAnimal(Animal animal, String raca, String classificacao) throws AnimalExistenteException;
 
     public void atualizarAnimal(Animal animal) throws AnimalInexistenteException;
 
@@ -79,7 +75,11 @@ public interface ServicosFachada extends Serializable {
     public List<Animal> listarAnimal();
 
     public List<Animal> buscarAnimalPorNome(String nome) throws AnimalInexistenteException;
+
+    public Animal buscarAnimalPorDono(Usuario dono, String nomeAnimal) throws AnimalInexistenteException;
     
+    public List<Animal> buscarAnimalPorCaracteristicas(String caracteristicas) throws AnimalInexistenteException;
+
     public List<Animal> buscarAnimalPorRaca(Raca raca) throws AnimalInexistenteException;
 
     public List<Animal> buscarAnimalClassificacao(String classificacao) throws AnimalInexistenteException;

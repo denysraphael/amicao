@@ -8,6 +8,7 @@ package br.upe.amicao.negocios;
 import br.upe.amicao.exceptions.AnimalInexistenteException;
 import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Raca;
+import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.AnimalExistenteException;
 import java.io.Serializable;
 import java.util.List;
@@ -18,9 +19,11 @@ public interface ServicosAnimal extends Serializable {
      * Cadastrar um Animal
      * 
      * @param animal
+     * @param raca
+     * @param classificacao
      * @throws AnimalExistenteException 
      */
-    public void cadastrarAnimal(Animal animal) throws AnimalExistenteException;
+    public void cadastrarAnimal(Animal animal, String raca, String classificacao) throws AnimalExistenteException;
 
     /**
      * Atualizar um Animal
@@ -63,6 +66,25 @@ public interface ServicosAnimal extends Serializable {
      */
     public List<Animal> buscarAnimalPorNome(String nome) throws AnimalInexistenteException;
 
+    /**
+     * Buscar uma lista de Animais pelo Dono
+     * 
+     * @param dono
+     * @param nomeAnimal
+     * @return
+     * @throws AnimalInexistenteException 
+     */
+    public Animal buscarAnimalPorDono(Usuario dono, String nomeAnimal) throws AnimalInexistenteException;
+    
+    /**
+     * Busca Animais por Características
+     * 
+     * @param caracteristicas
+     * @return
+     * @throws AnimalInexistenteException 
+     */
+    public List<Animal> buscarAnimalPorCaracteristicas(String caracteristicas) throws AnimalInexistenteException;
+    
     /**
      * Buscar Animais pela Raça
      * 

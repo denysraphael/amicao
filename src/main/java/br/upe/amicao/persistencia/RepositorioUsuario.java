@@ -12,9 +12,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
-
+    
     public Usuario findByEmail(String email);
-
+    
     public Usuario findByEmailAndSenha(String email, String senha);
     
     //@Query("Select u from Usuario u where u.nome like '%nomeUsuario%'")

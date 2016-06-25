@@ -6,7 +6,6 @@
 package br.upe.amicao.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -28,34 +27,32 @@ public class Adocao implements Serializable{
     private Animal animal;
     private Usuario anunciador;
     private Usuario adotante;
-    private List<Usuario> interessados;
-    private Date dataAnuncio;
-    private Date dataAdocao;
     private boolean ativo;
 
     public Adocao() {
     }
 
-    public Adocao(String descricao, Animal animal, Usuario anunciador, Usuario adotante, List<Usuario> interessados, Date dataAnuncio, Date dataAdocao, boolean ativo) {
+    public Adocao(String descricao, Animal animal, Usuario anunciador) {
+        this.descricao = descricao;
+        this.animal = animal;
+        this.anunciador = anunciador;
+        this.ativo = true;
+    }
+
+    public Adocao(String descricao, Animal animal, Usuario anunciador, Usuario adotante, boolean ativo) {
         this.descricao = descricao;
         this.animal = animal;
         this.anunciador = anunciador;
         this.adotante = adotante;
-        this.interessados = interessados;
-        this.dataAnuncio = dataAnuncio;
-        this.dataAdocao = dataAdocao;
         this.ativo = ativo;
     }
 
-    public Adocao(Long codigo, String descricao, Animal animal, Usuario anunciador, Usuario adotante, List<Usuario> interessados, Date dataAnuncio, Date dataAdocao, boolean ativo) {
+    public Adocao(Long codigo, String descricao, Animal animal, Usuario anunciador, Usuario adotante, boolean ativo) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.animal = animal;
         this.anunciador = anunciador;
         this.adotante = adotante;
-        this.interessados = interessados;
-        this.dataAnuncio = dataAnuncio;
-        this.dataAdocao = dataAdocao;
         this.ativo = ativo;
     }
 
@@ -104,41 +101,6 @@ public class Adocao implements Serializable{
         this.adotante = adotante;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    public List<Usuario> getInteressados() {
-        return interessados;
-    }
-
-    public void setInteressados(List<Usuario> interessados) {
-        this.interessados = interessados;
-    }
-
-    @Temporal(TemporalType.DATE)
-    public Date getDataAnuncio() {
-        return dataAnuncio;
-    }
-
-    public void setDataAnuncio(Date dataAnuncio) {
-        this.dataAnuncio = dataAnuncio;
-    }
-
-    @Temporal(TemporalType.DATE)
-    public Date getDataInteressado() {
-        return dataAdocao;
-    }
-
-    public void setDataInteressado(Date dataInteressado) {
-        this.dataAdocao = dataInteressado;
-    }
-
-    public Date getDataAdocao() {
-        return dataAdocao;
-    }
-
-    public void setDataAdocao(Date dataAdocao) {
-        this.dataAdocao = dataAdocao;
-    }
-
     public boolean isAtivo() {
         return ativo;
     }
@@ -155,9 +117,6 @@ public class Adocao implements Serializable{
         hash = 71 * hash + Objects.hashCode(this.animal);
         hash = 71 * hash + Objects.hashCode(this.anunciador);
         hash = 71 * hash + Objects.hashCode(this.adotante);
-        hash = 71 * hash + Objects.hashCode(this.interessados);
-        hash = 71 * hash + Objects.hashCode(this.dataAnuncio);
-        hash = 71 * hash + Objects.hashCode(this.dataAdocao);
         hash = 71 * hash + (this.ativo ? 1 : 0);
         return hash;
     }
@@ -192,20 +151,11 @@ public class Adocao implements Serializable{
         if (!Objects.equals(this.adotante, other.adotante)) {
             return false;
         }
-        if (!Objects.equals(this.interessados, other.interessados)) {
-            return false;
-        }
-        if (!Objects.equals(this.dataAnuncio, other.dataAnuncio)) {
-            return false;
-        }
-        if (!Objects.equals(this.dataAdocao, other.dataAdocao)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Adocao{" + "codigo=" + codigo + ", descricao=" + descricao + ", animal=" + animal + ", anunciador=" + anunciador + ", adotante=" + adotante + ", interessados=" + interessados + ", dataAnuncio=" + dataAnuncio + ", dataAdocao=" + dataAdocao + ", ativo=" + ativo + '}';
+        return "Adocao{" + "codigo=" + codigo + ", descricao=" + descricao + ", animal=" + animal + ", anunciador=" + anunciador + ", adotante=" + adotante + ", ativo=" + ativo + '}';
     }
 }

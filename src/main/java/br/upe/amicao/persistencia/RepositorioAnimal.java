@@ -9,7 +9,9 @@ import br.upe.amicao.entidades.Animal;
 import br.upe.amicao.entidades.Raca;
 import br.upe.amicao.entidades.Usuario;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -52,9 +54,11 @@ public interface RepositorioAnimal extends CrudRepository<Animal, Long> {
     /**
      * Procura todos os Animais de um Usuário (dono)
      * @param dono
+     * @param nome
      * @return 
      */
-    public List<Animal> findByDono(Usuario dono);
+    @Query("SELECT a FROM Animal a WHERE a.dono=:dono AND a.nome=:nome")
+    public Animal findAnimalPorDonoENome(@Param("dono") Usuario dono, @Param("nome") String nome);
     
     /**
      * Lista todos os Animais

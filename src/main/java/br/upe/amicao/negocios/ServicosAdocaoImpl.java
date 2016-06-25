@@ -68,9 +68,6 @@ public class ServicosAdocaoImpl implements ServicosAdocao {
             adocaoAtualizar.setAnimal(adocao.getAnimal());
             adocaoAtualizar.setAnunciador(adocao.getAnunciador());
             adocaoAtualizar.setAdotante(adocao.getAdotante());
-            adocaoAtualizar.setInteressados(adocao.getInteressados());
-            adocaoAtualizar.setDataAnuncio(adocao.getDataAnuncio());
-            adocaoAtualizar.setDataAdocao(adocao.getDataAdocao());
             adocaoAtualizar.setAtivo(adocao.isAtivo());
 
             repAdocao.save(adocaoAtualizar);
@@ -83,9 +80,16 @@ public class ServicosAdocaoImpl implements ServicosAdocao {
         Adocao adocaoDesativar = this.buscarAdocaoPorCodigo(adocao.getCodigo());
         
         if (adocaoDesativar != null) {
-            adocaoDesativar.setAtivo(false);
-            
-            repAdocao.save(adocaoDesativar);
+            try {
+                adocaoDesativar.getAnimal().setDono(adocao.getAdotante());
+                this.servicosAnimal.atualizarAnimal(adocaoDesativar.getAnimal());
+                adocaoDesativar.setAtivo(false);
+                adocaoDesativar.setAdotante(adocao.getAdotante());
+                
+                repAdocao.save(adocaoDesativar);
+            } catch (AnimalInexistenteException ex) {
+                Logger.getLogger(ServicosAdocaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -156,8 +160,8 @@ public class ServicosAdocaoImpl implements ServicosAdocao {
     }
     
     @Override
-    public List<Adocao> buscarAdocaoPorRaca(Raca raca) throws AdocaoInexistenteException {
-        List<Adocao> temp = repAdocao.buscarPorRaca(raca.getNome());
+    public List<Adocao> buscarAdocaoPorRaca(String nomeRaca) throws AdocaoInexistenteException {
+        List<Adocao> temp = repAdocao.buscarPorRaca(nomeRaca);
         
         if (temp.isEmpty()) {
             throw new AdocaoInexistenteException();

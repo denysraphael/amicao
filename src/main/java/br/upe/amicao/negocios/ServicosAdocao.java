@@ -46,7 +46,7 @@ public interface ServicosAdocao extends Serializable {
 
     //public List<ListarAdocao> buscarPorData(Date data);
     
-    public List<Adocao> buscarAdocaoPorRaca(Raca raca) throws AdocaoInexistenteException;
+    public List<Adocao> buscarAdocaoPorRaca(String nomeRaca) throws AdocaoInexistenteException;
 
     //public void interesseAdocao(String email, long codigo) throws UsuarioInexistenteException, ProprioUsuarioAnunciadorException, AdocaoJaRealizadaException;
 

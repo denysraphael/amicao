@@ -11,15 +11,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Buscar Usuário</title>
+        <title>Buscar Animal</title>
     </head>
     <body>
-        <h1>Buscar Usuário</h1>
+        <h1>Buscar Animal</h1>
         <form action="buscar" method="GET">
             <h3>Escolha uma opção de busca:</h3>
             <div>
                 <input type="radio" name="tipo" value="nome"> Nome
-                <input type="radio" name="tipo" value="email"> E-mail
+                <input type="radio" name="tipo" value="raca"> Raça
+                <input type="radio" name="tipo" value="caracteristicas"> Características
                 <input type="radio" name="tipo" value="todos"> Listar Todos
             </div>
             <div>
@@ -38,21 +39,12 @@
 
             <div>
                 <form action="atualizar" method="POST">
-                    <h3>Atualizar Usuário</h3>
-                    <div>Email Atual: <input type="text" name="emailAtual"></div>
-                    <div>Novo E-mail: <input type="email" name="email"></div>
+                    <h3>Atualizar Animal</h3>
+                    <div>Código: <input type="text" name="codigo"></div>
                     <div>Novo Nome: <input type="text" name="nome"></div>
-                    <div>Nova Senha: <input type="password" name="senha"></div>
-                    <div>Novo Telefone: <input type="text" name="telefone"></div>
+                    <div>Nova Raça: <input type="text" name="raca"></div>
+                    <div>Novas Características: <input type="text" name="caracteristicas"></div>
                     <div><input type="submit" value="Atualizar"></div>
-                </form>
-
-                <form action="desativar" method="POST">
-                    <h3>Desativar Usuário</h3>
-                    <h5>Informe o e-mail e a senha do usuário que deseja desativar</h5>
-                    <div>E-mail: <input type="email" name="email"></div>
-                    <div>Senha: <input type="password" name="senha"></div>
-                    <div><input type="submit" value="Desativar"></div>
                 </form>
             </div>
         </c:if>

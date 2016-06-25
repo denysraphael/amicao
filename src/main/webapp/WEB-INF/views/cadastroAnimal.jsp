@@ -14,8 +14,13 @@
     <body>
        <form action="cadastrar" method="POST">
             <h1>Cadastro Animal</h1>
+            <h3>Informações do Dono</h3>
+            <div>E-mail: <input type="email" name="email"></div>
+            <div>Senha: <input type="password" name="senha"></div>
+            <h3>Informações do Animal</h3>
             <div>Nome: <input type="text" name="nome"></div>
-            <div>Raca: <input type="text" name="raca"></div>
+            <div>Raca: <input type="text" name="racaAnimal"></div>
+            <div>Classificação: <input type="text" name="classifAnimal"></div>
             <div>Caracteristicas: <input type="text" name="caracteristicas"></div>
             <div>Data: <input type="date" name="dataNascimento"></div>
             <div><input type="submit" value="Enviar"></div>
