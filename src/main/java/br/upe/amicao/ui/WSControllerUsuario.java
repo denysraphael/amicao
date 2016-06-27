@@ -5,14 +5,12 @@
  */
 package br.upe.amicao.ui;
 
-import org.apache.log4j.Logger;
 import br.upe.amicao.entidades.Usuario;
 import br.upe.amicao.exceptions.UsuarioExistenteException;
 import br.upe.amicao.exceptions.UsuarioInexistenteException;
 import br.upe.amicao.negocios.ServicosFachada;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/usuario")
 public class WSControllerUsuario {
-
-    private static Logger log = Logger.getLogger(WSControllerUsuario.class);
 
     @Autowired
     private ServicosFachada fachada;
@@ -65,7 +60,7 @@ public class WSControllerUsuario {
         List<String> list = new ArrayList<String>();
 
         switch (tipo) {
-            case "codigo":
+            case "nome":
                 try {
                     List<Usuario> users = this.fachada.buscarUsuarioPorNome(dado);
 
