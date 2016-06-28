@@ -193,7 +193,7 @@ public class WSControllerAnimal {
                 a.setNome(nome);
             }
             if (!raca.equals("")) {
-                Raca r = this.fachada.buscarRacaPorNome(nome);
+                Raca r = this.fachada.buscarRacaPorNome(raca);
                 a.setRaca(r);
             }
             if (!caracteristicas.equals("")) {

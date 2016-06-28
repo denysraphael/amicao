@@ -85,7 +85,7 @@ public class ServicosAnimalImpl implements ServicosAnimal {
 
     @Override
     public Animal buscarAnimalPorCodigo(Long codigo) throws AnimalInexistenteException {
-        Animal a = repAnimal.findByCodigo(codigo);
+        Animal a = repAnimal.findOne(codigo);
 
         if (a == null) {
             throw new AnimalInexistenteException();
